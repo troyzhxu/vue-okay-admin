@@ -18,11 +18,12 @@
     getCurrentInstance,
     provide,
   } from 'vue';
-
   import { useDesign } from '/@/hooks/web/useDesign';
   import { propTypes } from '/@/utils/propTypes';
   import { createSimpleRootMenuContext } from './useSimpleMenuContext';
+  import { isUrl } from '/@/utils/is';
   import mitt from '/@/utils/mitt';
+
   export default defineComponent({
     name: 'Menu',
     props: {
@@ -131,8 +132,10 @@
         openedNames.value = !props.collapse ? [...props.openNames] : [];
         updateOpened();
         rootMenuEmitter.on('on-menu-item-select', (name: string) => {
-          currentActiveName.value = name;
-
+          if (!isUrl(name)) {
+            // 对于外链菜单，点击时不切换当前菜单
+            currentActiveName.value = name;
+          }
           nextTick(() => {
             props.collapse && removeAll();
           });

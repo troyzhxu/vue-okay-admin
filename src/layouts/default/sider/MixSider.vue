@@ -98,6 +98,8 @@
   import { listenerRouteChange } from '/@/logics/mitt/routeChange';
   import { SimpleMenu } from '/@/components/SimpleMenu';
   import LayoutTrigger from '../trigger/index.vue';
+  import { isUrl } from '/@/utils/is';
+  import { openWindow } from '/@/utils';
 
   export default defineComponent({
     name: 'LayoutMixSider',
@@ -210,6 +212,11 @@
 
       // Process module menu click
       async function hanldeModuleClick(path: string, hover = false) {
+        if (isUrl(path)) {
+          // 外链直接处理
+          openWindow(path);
+          return;
+        }
         const children = await getChildrenMenus(path);
 
         if (unref(activePath) === path) {

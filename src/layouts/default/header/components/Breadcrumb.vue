@@ -29,12 +29,13 @@
   import { useRouter } from 'vue-router';
 
   import { propTypes } from '/@/utils/propTypes';
-  import { isString } from '/@/utils/is';
+  import { isString, isUrl } from '/@/utils/is';
   import { filter } from '/@/utils/helper/treeHelper';
   import { getMenus } from '/@/router/menus';
 
   import { REDIRECT_NAME } from '/@/router/constant';
   import { getAllParentPath } from '/@/router/helper/menuHelper';
+  import { openWindow } from '/@/utils';
 
   export default defineComponent({
     name: 'LayoutBreadcrumb',
@@ -133,6 +134,11 @@
             const ps = paths.slice(1);
             const lastPath = ps.pop() || '';
             goPath = `${lastPath}`;
+          }
+          if (isUrl(goPath)) {
+            // 外链直接跳转
+            openWindow(goPath);
+            return;
           }
           goPath = /^\//.test(goPath) ? goPath : `/${goPath}`;
           go(goPath);

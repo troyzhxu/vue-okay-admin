@@ -213,7 +213,7 @@
       // Process module menu click
       async function hanldeModuleClick(path: string, hover = false) {
         if (isUrl(path)) {
-          // 外链直接处理
+          // 外链直接跳转
           openWindow(path);
           return;
         }

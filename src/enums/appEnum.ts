@@ -10,6 +10,7 @@ export enum ContentEnum {
 
 // menu theme enum
 export enum ThemeEnum {
+  AUTO = 'auto',
   DARK = 'dark',
   LIGHT = 'light',
 }

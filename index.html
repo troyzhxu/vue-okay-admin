@@ -18,6 +18,19 @@
         var htmlRoot = document.getElementById('htmlRoot');
         var theme = window.localStorage.getItem('<%= darkModeKey %>');
         if (htmlRoot && theme) {
+          if (theme == 'auto') {
+            var isNight = (() => {
+              var now = new Date();
+              var month = now.getMonth();
+              var hour = now.getHours();
+              if (month > 4 && month <= 10) {
+                return hour < 5 || hour >= 21;
+              }
+              return hour < 6 || hour >= 20;
+            })();
+            theme = isNight ? 'dark' : 'light';
+            isNight = now = month = hour = null;
+          }
           htmlRoot.setAttribute('data-theme', theme);
           theme = htmlRoot = null;
         }

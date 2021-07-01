@@ -53,6 +53,8 @@ export function useRootSetting() {
 
   const getDarkMode = computed(() => appStore.getDarkMode);
 
+  const getAppTheme = computed(() => appStore.getAppTheme);
+
   const getLayoutContentMode = computed(() =>
     appStore.getProjectConfig.contentMode === ContentEnum.FULL
       ? ContentEnum.FULL
@@ -88,6 +90,7 @@ export function useRootSetting() {
     getContentMode,
     getLockTime,
     getThemeColor,
+    getAppTheme,
     getDarkMode,
     setDarkMode,
     getShowDarkModeToggle,

@@ -16,6 +16,7 @@ import { Persistent } from '/@/utils/cache/persistent';
 import { darkMode } from '/@/settings/designSetting';
 import { resetRouter } from '/@/router';
 import { deepMerge } from '/@/utils';
+import { useDarkMode } from '/@/hooks/web/useDarkMode';
 
 interface AppState {
   darkMode: ThemeEnum;
@@ -39,10 +40,16 @@ export const useAppStore = defineStore({
     getPageLoading(): boolean {
       return this.pageLoading;
     },
-    getDarkMode(): ThemeEnum {
+    getAppTheme(): ThemeEnum {
       return this.darkMode;
     },
-
+    getDarkMode(): ThemeEnum {
+      if (this.darkMode == ThemeEnum.AUTO) {
+        const { isNowNight } = useDarkMode();
+        return isNowNight() ? ThemeEnum.DARK : ThemeEnum.LIGHT;
+      }
+      return this.darkMode;
+    },
     getBeforeMiniInfo(): BeforeMiniState {
       return this.beforeMiniInfo;
     },

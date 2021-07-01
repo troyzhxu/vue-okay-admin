@@ -16,7 +16,7 @@
     <script>
       (() => {
         var htmlRoot = document.getElementById('htmlRoot');
-        var theme = window.localStorage.getItem('__APP__DARK__MODE__');
+        var theme = window.localStorage.getItem('<%= darkModeKey %>');
         if (htmlRoot && theme) {
           htmlRoot.setAttribute('data-theme', theme);
           theme = htmlRoot = null;
@@ -35,8 +35,10 @@
 
         .app-loading {
           display: flex;
+          position: absolute;
+          top: 0;
+          bottom: 0;
           width: 100%;
-          height: 100%;
           justify-content: center;
           align-items: center;
           flex-direction: column;

@@ -8,6 +8,13 @@ input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
 
+html[data-theme='dark'] {
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #232a3b inset !important;
+    -webkit-text-fill-color: #c9d1d9;
+  }
+}
+
 :-webkit-autofill {
   transition: background-color 5000s ease-in-out 0s !important;
 }

@@ -2,7 +2,7 @@ import { ThemeEnum } from '../enums/appEnum';
 
 export const prefixCls = 'okay';
 
-export const darkMode = ThemeEnum.LIGHT;
+export const darkMode = ThemeEnum.AUTO;
 
 // app theme preset color
 export const APP_PRESET_COLOR_LIST: string[] = [

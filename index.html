@@ -18,7 +18,7 @@
         var htmlRoot = document.getElementById('htmlRoot');
         var theme = window.localStorage.getItem('<%= darkModeKey %>');
         if (htmlRoot && theme) {
-          if (theme == 'auto') {
+          if (!theme || theme === 'auto') {
             var isNight = (() => {
               var now = new Date();
               var month = now.getMonth();

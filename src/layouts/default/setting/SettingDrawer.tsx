@@ -64,7 +64,7 @@ export default defineComponent({
     const {
       getIsHorizontal,
       getShowMenu,
-      getMenuType,
+      getMenuLayout,
       getTrigger,
       getCollapsedShowTitle,
       getMenuFixed,
@@ -107,7 +107,7 @@ export default defineComponent({
                 split: unref(getIsHorizontal) ? false : undefined,
               });
             }}
-            def={unref(getMenuType)}
+            def={unref(getMenuLayout)}
           />
         </>
       );
@@ -161,7 +161,7 @@ export default defineComponent({
             title={t('layout.setting.splitMenu')}
             event={HandlerEnum.MENU_SPLIT}
             def={unref(getSplit)}
-            disabled={!unref(getShowMenuRef) || unref(getMenuType) !== MenuLayoutEnum.MIX}
+            disabled={!unref(getShowMenuRef) || unref(getMenuLayout) !== MenuLayoutEnum.MIX}
           />
           <SwitchItem
             title={t('layout.setting.mixSidebarFixed')}

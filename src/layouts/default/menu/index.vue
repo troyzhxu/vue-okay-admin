@@ -42,7 +42,7 @@
 
       const {
         getMenuMode,
-        getMenuType,
+        getMenuLayout,
         getMenuTheme,
         getCollapsed,
         getCollapsedShowTitle,
@@ -148,7 +148,7 @@
           <BasicMenu
             {...menuProps}
             isHorizontal={props.isHorizontal}
-            type={unref(getMenuType)}
+            type={unref(getMenuLayout)}
             showLogo={unref(getIsShowLogo)}
             mode={unref(getComputedMenuMode)}
             items={menus}

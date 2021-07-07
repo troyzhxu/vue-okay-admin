@@ -26,7 +26,7 @@
 
   import { menuLayoutList } from '../enum';
   export default defineComponent({
-    name: 'MenuTypePicker',
+    name: 'MenuLayoutPicker',
     components: { Tooltip },
     props: {
       menuLayoutList: {

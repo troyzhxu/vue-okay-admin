@@ -23,7 +23,7 @@ export function useMenuSetting() {
 
   const getCollapsed = computed(() => appStore.getMenuSetting.collapsed);
 
-  const getMenuType = computed(() => appStore.getMenuSetting.type);
+  const getMenuLayout = computed(() => appStore.getMenuSetting.type);
 
   const getMenuMode = computed(() => appStore.getMenuSetting.mode);
 
@@ -57,9 +57,9 @@ export function useMenuSetting() {
     () => appStore.getMenuSetting.closeMixSidebarOnChange
   );
 
-  const getIsSidebarType = computed(() => unref(getMenuType) === MenuLayoutEnum.SIDEBAR);
+  const getIsSidebarType = computed(() => unref(getMenuLayout) === MenuLayoutEnum.SIDEBAR);
 
-  const getIsTopMenu = computed(() => unref(getMenuType) === MenuLayoutEnum.TOP_MENU);
+  const getIsTopMenu = computed(() => unref(getMenuLayout) === MenuLayoutEnum.TOP_MENU);
 
   const getCollapsedShowTitle = computed(() => appStore.getMenuSetting.collapsedShowTitle);
 
@@ -69,7 +69,7 @@ export function useMenuSetting() {
 
   const getShowHeaderTrigger = computed(() => {
     if (
-      unref(getMenuType) === MenuLayoutEnum.TOP_MENU ||
+      unref(getMenuLayout) === MenuLayoutEnum.TOP_MENU ||
       !unref(getShowMenu) ||
       unref(getMenuHidden)
     ) {
@@ -84,11 +84,13 @@ export function useMenuSetting() {
   });
 
   const getIsMixSidebar = computed(() => {
-    return unref(getMenuType) === MenuLayoutEnum.MIX_SIDEBAR;
+    return unref(getMenuLayout) === MenuLayoutEnum.MIX_SIDEBAR;
   });
 
   const getIsMixMode = computed(() => {
-    return unref(getMenuMode) === MenuModeEnum.INLINE && unref(getMenuType) === MenuLayoutEnum.MIX;
+    return (
+      unref(getMenuMode) === MenuModeEnum.INLINE && unref(getMenuLayout) === MenuLayoutEnum.MIX
+    );
   });
 
   const getRealWidth = computed(() => {
@@ -134,7 +136,7 @@ export function useMenuSetting() {
 
     getMenuFixed,
     getRealWidth,
-    getMenuType,
+    getMenuLayout,
     getMenuMode,
     getShowMenu,
     getCollapsed,

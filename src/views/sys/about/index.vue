@@ -21,7 +21,7 @@
   import { PageWrapper } from '/@/components/Page';
   import { Description, DescItem, useDescription } from '/@/components/Description/index';
 
-  import { GITHUB_URL, SITE_URL, DOC_URL } from '/@/settings/siteSetting';
+  import { GITHUB_URL, DOC_URL } from '/@/settings/siteSetting';
   export default defineComponent({
     name: 'AboutPage',
     components: { Description, PageWrapper },
@@ -53,11 +53,6 @@
           render: commonLinkRender('文档地址'),
         },
         {
-          label: '预览地址',
-          field: 'preview',
-          render: commonLinkRender('预览地址'),
-        },
-        {
           label: 'Github',
           field: 'github',
           render: commonLinkRender('Github'),
@@ -68,7 +63,6 @@
         version,
         lastBuildTime,
         doc: DOC_URL,
-        preview: SITE_URL,
         github: GITHUB_URL,
       };
 

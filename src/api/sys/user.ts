@@ -20,6 +20,7 @@ export function loginApi(params: LoginParams, showErr = true) {
     },
     {
       errMsgMode: showErr ? 'modal' : 'none',
+      withToken: false,
     }
   );
 }

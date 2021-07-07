@@ -47,23 +47,12 @@ export default [
     url: '/basic-api/login',
     timeout: 200,
     method: 'post',
-    response: ({ body }) => {
-      const { username, password } = body;
-      const checkUser = createFakeUserList().find(
-        (item) => item.username === username && password === item.password
-      );
-      if (!checkUser) {
-        return resultError('Incorrect account or password！');
-      }
-      const { userId, username: _username, token, realName, desc, roles } = checkUser;
-      return resultSuccess({
-        roles,
-        userId,
-        username: _username,
-        token,
-        realName,
-        desc,
-      });
+    response: () => {
+      return {
+        accessToken: 'xxxxxxxxxxxxxxxxxxxxx',
+        refreshToken: 'xxxxxxxxxxxxxxxxxxxxxxxx',
+        expiresIn: 3600,
+      };
     },
   },
   {

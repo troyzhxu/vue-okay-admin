@@ -91,11 +91,11 @@
 
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useMessage } from '/@/hooks/web/useMessage';
-
+  import { PageEnum } from '/@/enums/pageEnum';
   import { useUserStore } from '/@/store/modules/user';
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '/@/hooks/web/useDesign';
-  //import { onKeyStroke } from '@vueuse/core';
+  import { router } from '/@/router';
 
   export default defineComponent({
     name: 'LoginForm',
@@ -118,7 +118,7 @@
     },
     setup() {
       const { t } = useI18n();
-      const { notification, createErrorModal } = useMessage();
+      const { notification } = useMessage();
       const { prefixCls } = useDesign('login');
       const userStore = useUserStore();
 
@@ -136,8 +136,6 @@
 
       const { validForm } = useFormValid(formRef);
 
-      //onKeyStroke('Enter', handleLogin);
-
       const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN);
 
       async function handleLogin() {
@@ -149,22 +147,18 @@
             toRaw({
               password: data.password,
               username: data.account,
-              mode: 'none', //不要默认的错误提示
             })
           );
           if (userInfo) {
+            await router.replace(PageEnum.BASE_HOME);
             notification.success({
               message: t('sys.login.loginSuccessTitle'),
-              description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realName}`,
+              description: `${t('sys.login.loginSuccessDesc')}: ${
+                userInfo.nickname || userInfo.username
+              }`,
               duration: 3,
             });
           }
-        } catch (error) {
-          createErrorModal({
-            title: t('sys.api.errorTip'),
-            content: error.message || t('sys.api.networkExceptionMsg'),
-            getContainer: () => document.body.querySelector(`.${prefixCls}`) || document.body,
-          });
         } finally {
           loading.value = false;
         }

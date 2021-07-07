@@ -1,6 +1,4 @@
-import { resultSuccess, resultError, getRequestToken, requestParams } from '../_util';
 import { MockMethod } from 'vite-plugin-mock';
-import { createFakeUserList } from './user';
 
 // single
 const dashboardRoute = {
@@ -201,22 +199,8 @@ export default [
     url: '/basic-api/getMenuList',
     timeout: 1000,
     method: 'get',
-    response: (request: requestParams) => {
-      const token = getRequestToken(request);
-      if (!token) {
-        return resultError('Invalid token!');
-      }
-      const checkUser = createFakeUserList().find((item) => item.token === token);
-      if (!checkUser) {
-        return resultError('Invalid user token!');
-      }
-      const id = checkUser.userId;
-      if (!id || id === '1') {
-        return resultSuccess([dashboardRoute, authRoute, levelRoute, sysRoute, linkRoute]);
-      }
-      if (id === '2') {
-        return resultSuccess([dashboardRoute, authRoute, levelRoute, linkRoute]);
-      }
+    response: () => {
+      return [dashboardRoute, authRoute, levelRoute, sysRoute, linkRoute];
     },
   },
 ] as MockMethod[];

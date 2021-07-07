@@ -18,7 +18,7 @@ import { resetRouter } from '/@/router';
 import { deepMerge } from '/@/utils';
 
 interface AppState {
-  darkMode?: ThemeEnum;
+  darkMode: ThemeEnum;
   // Page loading status
   pageLoading: boolean;
   // project config
@@ -30,7 +30,7 @@ let timeId: TimeoutHandle;
 export const useAppStore = defineStore({
   id: 'app',
   state: (): AppState => ({
-    darkMode: undefined,
+    darkMode: (localStorage.getItem(APP_DARK_MODE_KEY) || darkMode) as ThemeEnum,
     pageLoading: false,
     projectConfig: Persistent.getLocal(PROJ_CFG_KEY),
     beforeMiniInfo: {},
@@ -39,8 +39,8 @@ export const useAppStore = defineStore({
     getPageLoading(): boolean {
       return this.pageLoading;
     },
-    getDarkMode(): 'light' | 'dark' | string {
-      return this.darkMode || localStorage.getItem(APP_DARK_MODE_KEY) || darkMode;
+    getDarkMode(): ThemeEnum {
+      return this.darkMode;
     },
 
     getBeforeMiniInfo(): BeforeMiniState {

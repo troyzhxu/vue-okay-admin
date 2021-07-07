@@ -23,6 +23,7 @@
   import { createSimpleRootMenuContext } from './useSimpleMenuContext';
   import { isUrl } from '/@/utils/is';
   import mitt from '/@/utils/mitt';
+  import { Props } from './types';
 
   export default defineComponent({
     name: 'Menu',
@@ -125,7 +126,7 @@
         isRemoveAllPopup,
         sliceIndex,
         level: 0,
-        props,
+        props: props as Props,
       });
 
       onMounted(() => {

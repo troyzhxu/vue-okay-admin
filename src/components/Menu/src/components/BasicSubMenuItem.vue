@@ -16,7 +16,7 @@
   </SubMenu>
 </template>
 <script lang="ts">
-  import type { Menu as MenuType } from '/@/router/types';
+  import type { Menu as TMenu } from '/@/router/types';
   import { defineComponent, computed } from 'vue';
   import { Menu } from 'ant-design-vue';
   import { useDesign } from '/@/hooks/web/useDesign';
@@ -37,7 +37,7 @@
       const { prefixCls } = useDesign('basic-menu-item');
 
       const getShowMenu = computed(() => !props.item.meta?.hideMenu);
-      function menuHasChildren(menuTreeItem: MenuType): boolean {
+      function menuHasChildren(menuTreeItem: TMenu): boolean {
         return (
           !menuTreeItem.meta?.hideChildrenInMenu &&
           Reflect.has(menuTreeItem, 'children') &&

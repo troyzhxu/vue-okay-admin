@@ -23,7 +23,7 @@ export function useMenuSetting() {
 
   const getCollapsed = computed(() => appStore.getMenuSetting.collapsed);
 
-  const getMenuLayout = computed(() => appStore.getMenuSetting.type);
+  const getMenuLayout = computed(() => appStore.getMenuSetting.layout);
 
   const getMenuMode = computed(() => appStore.getMenuSetting.mode);
 

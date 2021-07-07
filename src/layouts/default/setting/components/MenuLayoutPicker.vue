@@ -6,9 +6,9 @@
           @click="handler(item)"
           :class="[
             `${prefixCls}__item`,
-            `${prefixCls}__item--${item.type}`,
+            `${prefixCls}__item--${item.layout}`,
             {
-              [`${prefixCls}__item--active`]: def === item.type,
+              [`${prefixCls}__item--active`]: def === item.layout,
             },
           ]"
         >
@@ -43,7 +43,7 @@
       },
     },
     setup() {
-      const { prefixCls } = useDesign('setting-menu-type-picker');
+      const { prefixCls } = useDesign('setting-menu-layout-picker');
 
       return {
         prefixCls,
@@ -52,7 +52,7 @@
   });
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{namespace}-setting-menu-type-picker';
+  @prefix-cls: ~'@{namespace}-setting-menu-layout-picker';
 
   .@{prefix-cls} {
     display: flex;

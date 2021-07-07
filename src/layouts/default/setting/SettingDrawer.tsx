@@ -2,7 +2,7 @@ import { defineComponent, computed, unref } from 'vue';
 import { BasicDrawer } from '/@/components/Drawer/index';
 import { Divider } from 'ant-design-vue';
 import {
-  TypePicker,
+  MenuLayoutPicker,
   ThemeColorPicker,
   SettingFooter,
   SwitchItem,
@@ -98,7 +98,7 @@ export default defineComponent({
     function renderSidebar() {
       return (
         <>
-          <TypePicker
+          <MenuLayoutPicker
             menuLayoutList={menuLayoutList}
             handler={(item: typeof menuLayoutList[0]) => {
               baseHandler(HandlerEnum.CHANGE_LAYOUT, {

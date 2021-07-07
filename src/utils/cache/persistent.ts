@@ -1,9 +1,10 @@
 import type { LockInfo, UserInfo } from '/#/store';
-import type { ProjectConfig } from '/#/config';
+import type { LocaleSetting, ProjectConfig } from '/#/config';
 import type { RouteLocationNormalized } from 'vue-router';
 
 import { createLocalStorage, createSessionStorage } from '/@/utils/cache';
 import {
+  LOCALE_KEY,
   TOKEN_KEY,
   USER_INFO_KEY,
   ROLES_KEY,
@@ -14,6 +15,7 @@ import {
 import { toRaw } from 'vue';
 
 interface BasicStore {
+  [LOCALE_KEY]: LocaleSetting;
   [TOKEN_KEY]: string | number | null | undefined;
   [USER_INFO_KEY]: UserInfo;
   [ROLES_KEY]: string[];

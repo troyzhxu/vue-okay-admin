@@ -4,7 +4,7 @@
 
 ## 简介
 
-Vue Okay Admin 是一个免费开源的中后台模版。使用了最新的`vue3`,`vite2`,`TypeScript`等主流技术开发，开箱即用的中后台前端解决方案，也可用于学习参考。
+Vue Okay Admin 是在 [Vben Admin](https://github.com/anncwb/vue-vben-admin) 基础上改造的中后台管理系统。使用了最新的`vue3`,`vite2`,`TypeScript`等主流技术开发，开箱即用的中后台前端解决方案，也可用于学习参考。
 
 ## 特性
 
@@ -18,7 +18,7 @@ Vue Okay Admin 是一个免费开源的中后台模版。使用了最新的`vue3
 
 ## 文档
 
-[文档地址](https://vvbin.cn/doc-next/)
+[Vben Admin 参考文档](https://vvbin.cn/doc-next/)
 
 ## 准备
 
@@ -36,13 +36,13 @@ Vue Okay Admin 是一个免费开源的中后台模版。使用了最新的`vue3
 - 获取项目代码
 
 ```bash
-git clone https://github.com/anncwb/vue-vben-admin.git
+git clone https://github.com/ejlchina/vue-okay-admin.git
 ```
 
 - 安装依赖
 
 ```bash
-cd vue-vben-admin
+cd vue-okay-admin
 
 yarn install
 
@@ -59,15 +59,6 @@ yarn serve
 ```bash
 yarn build
 ```
-
-## 更新日志
-
-[CHANGELOG](./CHANGELOG.zh_CN.md)
-
-## 项目地址
-
-- [vue-vben-admin](https://github.com/anncwb/vue-vben-admin) - 完整版
-- [vue-vben-admin-thin-next](https://github.com/anncwb/vben-admin-thin-next) - 简化版
 
 ## 如何贡献
 

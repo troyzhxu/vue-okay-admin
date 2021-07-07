@@ -1,10 +1,10 @@
 {
-  "name": "vben-admin",
+  "name": "vue-okay-admin",
   "version": "2.6.0",
   "author": {
-    "name": "vben",
-    "email": "anncwb@126.com",
-    "url": "https://github.com/anncwb"
+    "name": "zhouxu",
+    "email": "zhou.xu@ejlchina.com",
+    "url": "https://github.com/ejlchina"
   },
   "scripts": {
     "bootstrap": "yarn install",
@@ -125,13 +125,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anncwb/vue-vben-admin.git"
+    "url": "git+https://github.com/ejlchina/vue-okay-admin.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/anncwb/vue-vben-admin/issues"
+    "url": "https://github.com/ejlchina/vue-okay-admin/issues"
   },
-  "homepage": "https://github.com/anncwb/vue-vben-admin",
+  "homepage": "https://github.com/ejlchina/vue-okay-admin",
   "engines": {
     "node": "^12 || >=14"
   }

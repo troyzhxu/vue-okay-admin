@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Vue Okay Admin is a free and open source middle and back-end template. Using the latest `vue3`, `vite2`, `TypeScript` and other mainstream technology development, the out-of-the-box middle and back-end front-end solutions can also be used for learning reference.
+Vue Okay Admin is a middle and back-end admin template on the top of [Vben Admin](https://github.com/anncwb/vue-vben-admin). Using the latest `vue3`, `vite2`, `TypeScript` and other mainstream technology development, the out-of-the-box middle and back-end front-end solutions can also be used for learning reference.
 
 ## Feature
 
@@ -18,7 +18,7 @@ Vue Okay Admin is a free and open source middle and back-end template. Using the
 
 ## Documentation
 
-[Document](https://vvbin.cn/doc-next/)
+[Reference document](https://vvbin.cn/doc-next/)
 
 ## Preparation
 
@@ -36,13 +36,13 @@ Vue Okay Admin is a free and open source middle and back-end template. Using the
 - Get the project code
 
 ```bash
-git clone https://github.com/anncwb/vue-vben-admin.git
+git clone https://github.com/ejlchina/vue-okay-admin.git
 ```
 
 - Installation dependencies
 
 ```bash
-cd vue-vben-admin
+cd vue-okay-admin
 
 yarn install
 
@@ -59,15 +59,6 @@ yarn serve
 ```bash
 yarn build
 ```
-
-## Change Log
-
-[CHANGELOG](./CHANGELOG.zh_CN.md)
-
-## Project
-
-- [vue-vben-admin](https://github.com/anncwb/vue-vben-admin) - full version
-- [vue-vben-admin-thin-next](https://github.com/anncwb/vben-admin-thin-next) - Simplified version
 
 ## How to contribute
 

@@ -1,58 +1,67 @@
-import type { UserInfo } from '/#/store';
-import type { ErrorMessageMode } from '/#/axios';
+import type { AuthToken, UserInfo } from '/#/store';
 import { defineStore } from 'pinia';
 import { store } from '/@/store';
-import { RoleEnum } from '/@/enums/roleEnum';
 import { PageEnum } from '/@/enums/pageEnum';
-import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
+import { TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
 import { Persistent } from '/@/utils/cache/persistent';
-import { GetUserInfoModel, LoginParams } from '/@/api/sys/model/userModel';
-import { doLogout, getUserInfo, loginApi } from '/@/api/sys/user';
+import { TokenModel, LoginParams } from '/@/api/sys/model/userModel';
+import { loginApi, getUserInfo, refreshToken } from '/@/api/sys/user';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { router } from '/@/router';
 
 interface UserState {
+  token: Nullable<AuthToken>;
   userInfo: Nullable<UserInfo>;
-  token: Nullable<string>;
-  roleList: RoleEnum[];
   sessionTimeout?: boolean;
 }
 
 export const useUserStore = defineStore({
   id: 'app-user',
   state: (): UserState => ({
-    // user info
-    userInfo: Persistent.getLocal<UserInfo>(USER_INFO_KEY),
     // token
     token: Persistent.getLocal(TOKEN_KEY),
-    // roleList
-    roleList: Persistent.getLocal(ROLES_KEY) || [],
+    // user info
+    userInfo: Persistent.getLocal<UserInfo>(USER_INFO_KEY),
     // Whether the login expired
     sessionTimeout: false,
   }),
   getters: {
+    getIsLogin(): boolean {
+      const t = this.token;
+      return (
+        !!t &&
+        t.accessToken != undefined &&
+        t.refreshToken != undefined &&
+        t.expiresAt != undefined &&
+        t.expiresAt > Date.now() / 1000
+      );
+    },
     getUserInfo(): Nullable<UserInfo> {
       return this.userInfo;
     },
-    getToken(): Nullable<string> {
-      return this.token;
+    getUsername(): string {
+      return this.userInfo?.username || '';
     },
-    getRoleList(): RoleEnum[] {
-      return this.roleList;
+    getNickname(): string {
+      return this.userInfo?.nickname || this.getUsername;
+    },
+    getRoleList(): string[] {
+      return this.userInfo?.roles || [];
     },
     getSessionTimeout(): boolean {
       return !!this.sessionTimeout;
     },
   },
   actions: {
-    setToken(info: Nullable<string>) {
-      this.token = info;
-      Persistent.setLocal(TOKEN_KEY, info);
-    },
-    setRoleList(roleList: RoleEnum[]) {
-      this.roleList = roleList;
-      Persistent.setLocal(ROLES_KEY, roleList);
+    setToken(model: TokenModel) {
+      const token = {
+        accessToken: model.accessToken,
+        refreshToken: model.refreshToken,
+        expiresAt: Date.now() / 1000 + model.expiresIn,
+      };
+      this.token = token;
+      Persistent.setLocal(TOKEN_KEY, token);
     },
     setUserInfo(info: UserInfo) {
       this.userInfo = info;
@@ -63,57 +72,67 @@ export const useUserStore = defineStore({
     },
     resetState() {
       this.userInfo = null;
-      this.token = '';
-      this.roleList = [];
-      this.sessionTimeout = false;
+      this.token = null;
+      Persistent.removeLocal(TOKEN_KEY);
+      Persistent.removeLocal(USER_INFO_KEY);
+      console.log('Store U: reset');
     },
     /**
      * @description: login
      */
-    async login(
-      params: LoginParams & {
-        goHome?: boolean;
-        mode?: ErrorMessageMode;
-      }
-    ): Promise<GetUserInfoModel | null> {
+    async login(params: LoginParams, showErr = true): Promise<UserInfo | null> {
       try {
-        const { goHome = true, mode, ...loginParams } = params;
-        const data = await loginApi(loginParams, mode);
-        const { token } = data;
-
+        const token = await loginApi(params, showErr);
         // save token
         this.setToken(token);
         // get user info
-        const userInfo = await this.getUserInfoAction();
-
-        const sessionTimeout = this.sessionTimeout;
-        sessionTimeout && this.setSessionTimeout(false);
-        !sessionTimeout && goHome && (await router.replace(PageEnum.BASE_HOME));
-        return userInfo;
+        return await this.getUserInfoAction();
       } catch (error) {
         return Promise.reject(error);
       }
     },
+
     async getUserInfoAction() {
       const userInfo = await getUserInfo();
-      const { roles } = userInfo;
-      const roleList = roles.map((item) => item.value) as RoleEnum[];
       this.setUserInfo(userInfo);
-      this.setRoleList(roleList);
       return userInfo;
+    },
+
+    async getAccessToken(): Promise<string | null> {
+      const token = this.token;
+      if (token && token.expiresAt > Date.now() / 1000 + 180 && token.accessToken) {
+        // 还有 180 秒才过期
+        return token.accessToken;
+      }
+      if (token && token.refreshToken) {
+        // 刷新 Token
+        try {
+          const model = await refreshToken(token.refreshToken);
+          this.setToken(model);
+          return model.accessToken;
+        } catch (error) {
+          console.error('Store U: Token Refresh Error：', error);
+        }
+      }
+      const { createConfirm } = useMessage();
+      const { t } = useI18n();
+      createConfirm({
+        iconType: 'warning',
+        title: t('sys.app.logoutTip'),
+        content: t('sys.api.timeoutMessage'),
+        onOk: () => {
+          this.logout();
+        },
+      });
+      return null;
     },
     /**
      * @description: logout
      */
-    async logout(goLogin = false) {
-      try {
-        await doLogout();
-      } catch {
-        console.log('注销Token失败');
-      }
-      this.setToken(null);
-      this.setSessionTimeout(false);
-      goLogin && router.push(PageEnum.BASE_LOGIN);
+    logout() {
+      this.resetState();
+      router.push(PageEnum.BASE_LOGIN);
+      console.log('Store U: logout');
     },
 
     /**
@@ -126,8 +145,8 @@ export const useUserStore = defineStore({
         iconType: 'warning',
         title: t('sys.app.logoutTip'),
         content: t('sys.app.logoutMessage'),
-        onOk: async () => {
-          await this.logout(true);
+        onOk: () => {
+          this.logout();
         },
       });
     },

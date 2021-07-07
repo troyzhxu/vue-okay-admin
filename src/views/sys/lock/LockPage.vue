@@ -146,7 +146,7 @@
       }
 
       function goLogin() {
-        userStore.logout(true);
+        userStore.logout();
         lockStore.resetLockInfo();
       }
 

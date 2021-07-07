@@ -29,12 +29,24 @@ export interface ErrorLogInfo {
   time?: string;
 }
 
+export interface AuthToken {
+  accessToken: string;
+  refreshToken: string;
+  expiresAt: number;
+}
+
 export interface UserInfo {
-  userId: string | number;
+  userId: number;
+  // 用户名
   username: string;
-  realName: string;
-  avatar: string;
-  desc?: string;
+  // 昵称
+  nickname: string;
+  // 头像
+  avatar?: string;
+  // 角色
+  roles: string[];
+  // 权限
+  authorities: string[];
 }
 
 export interface BeforeMiniState {

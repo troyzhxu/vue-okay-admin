@@ -36,3 +36,12 @@ export interface GetUserInfoModel {
   // 介绍
   desc?: string;
 }
+
+/**
+ * @description: Login interface return value
+ */
+export interface TokenModel {
+  accessToken: string;
+  refreshToken: string;
+  expiresIn: number;
+}

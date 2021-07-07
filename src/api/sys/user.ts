@@ -1,11 +1,10 @@
 import { defHttp } from '/@/utils/http';
-import { LoginParams, LoginResultModel, GetUserInfoModel } from './model/userModel';
-
-import { ErrorMessageMode } from '/#/axios';
+import { LoginParams, TokenModel } from './model/userModel';
+import { UserInfo } from '/#/store';
 
 enum Api {
   Login = '/login',
-  Logout = '/logout',
+  TokenRefresh = '/access-token',
   GetUserInfo = '/getUserInfo',
   GetPermCode = '/getPermCode',
 }
@@ -13,14 +12,30 @@ enum Api {
 /**
  * @description: user login api
  */
-export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') {
-  return defHttp.post<LoginResultModel>(
+export function loginApi(params: LoginParams, showErr = true) {
+  return defHttp.post<TokenModel>(
     {
       url: Api.Login,
       params,
     },
     {
-      errorMessageMode: mode,
+      errorMessageMode: showErr ? 'modal' : 'none',
+    }
+  );
+}
+
+/**
+ * @description: 刷新 Token
+ */
+export function refreshToken(refreshToken: string) {
+  return defHttp.post<TokenModel>(
+    {
+      url: Api.TokenRefresh,
+      data: { refreshToken },
+    },
+    {
+      withToken: false,
+      errorMessageMode: 'none',
     }
   );
 }
@@ -29,13 +44,9 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
  * @description: getUserInfo
  */
 export function getUserInfo() {
-  return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo });
+  return defHttp.get<UserInfo>({ url: Api.GetUserInfo });
 }
 
 export function getPermCode() {
   return defHttp.get<string[]>({ url: Api.GetPermCode });
-}
-
-export function doLogout() {
-  return defHttp.get({ url: Api.Logout });
 }

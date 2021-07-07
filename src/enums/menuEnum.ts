@@ -1,7 +1,7 @@
 /**
  * @description: menu type
  */
-export enum MenuTypeEnum {
+export enum MenuLayoutEnum {
   // left menu
   SIDEBAR = 'sidebar',
 

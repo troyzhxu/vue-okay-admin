@@ -5,7 +5,7 @@ import { computed, unref, ref } from 'vue';
 import { useAppStore } from '/@/store/modules/app';
 
 import { SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH } from '/@/enums/appEnum';
-import { MenuModeEnum, MenuTypeEnum, TriggerEnum } from '/@/enums/menuEnum';
+import { MenuModeEnum, MenuLayoutEnum, TriggerEnum } from '/@/enums/menuEnum';
 import { useFullContent } from '/@/hooks/web/useFullContent';
 
 const mixSideHasChildren = ref(false);
@@ -57,9 +57,9 @@ export function useMenuSetting() {
     () => appStore.getMenuSetting.closeMixSidebarOnChange
   );
 
-  const getIsSidebarType = computed(() => unref(getMenuType) === MenuTypeEnum.SIDEBAR);
+  const getIsSidebarType = computed(() => unref(getMenuType) === MenuLayoutEnum.SIDEBAR);
 
-  const getIsTopMenu = computed(() => unref(getMenuType) === MenuTypeEnum.TOP_MENU);
+  const getIsTopMenu = computed(() => unref(getMenuType) === MenuLayoutEnum.TOP_MENU);
 
   const getCollapsedShowTitle = computed(() => appStore.getMenuSetting.collapsedShowTitle);
 
@@ -69,7 +69,7 @@ export function useMenuSetting() {
 
   const getShowHeaderTrigger = computed(() => {
     if (
-      unref(getMenuType) === MenuTypeEnum.TOP_MENU ||
+      unref(getMenuType) === MenuLayoutEnum.TOP_MENU ||
       !unref(getShowMenu) ||
       unref(getMenuHidden)
     ) {
@@ -84,11 +84,11 @@ export function useMenuSetting() {
   });
 
   const getIsMixSidebar = computed(() => {
-    return unref(getMenuType) === MenuTypeEnum.MIX_SIDEBAR;
+    return unref(getMenuType) === MenuLayoutEnum.MIX_SIDEBAR;
   });
 
   const getIsMixMode = computed(() => {
-    return unref(getMenuMode) === MenuModeEnum.INLINE && unref(getMenuType) === MenuTypeEnum.MIX;
+    return unref(getMenuMode) === MenuModeEnum.INLINE && unref(getMenuType) === MenuLayoutEnum.MIX;
   });
 
   const getRealWidth = computed(() => {

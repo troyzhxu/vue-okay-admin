@@ -1,4 +1,9 @@
-import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from '/@/enums/menuEnum';
+import {
+  MenuLayoutEnum,
+  MenuModeEnum,
+  TriggerEnum,
+  MixSidebarTriggerEnum,
+} from '/@/enums/menuEnum';
 import {
   ContentEnum,
   PermissionModeEnum,
@@ -22,7 +27,7 @@ export interface MenuSetting {
   split: boolean;
   menuWidth: number;
   mode: MenuModeEnum;
-  type: MenuTypeEnum;
+  type: MenuLayoutEnum;
   theme: ThemeEnum;
   topMenuAlign: 'start' | 'center' | 'end';
   trigger: TriggerEnum;
@@ -107,7 +112,7 @@ export interface ProjectConfig {
   showLogo: boolean;
   // Whether to show the global footer
   showFooter: boolean;
-  // menuType: MenuTypeEnum;
+  // menuType: MenuLayoutEnum;
   headerSetting: HeaderSetting;
   // menuSetting
   menuSetting: MenuSetting;

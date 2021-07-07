@@ -4,7 +4,7 @@
   import { createBreakpointListen } from '/@/hooks/event/useBreakpoint';
   import { prefixCls } from '/@/settings/designSetting';
   import { useAppStore } from '/@/store/modules/app';
-  import { MenuModeEnum, MenuTypeEnum } from '/@/enums/menuEnum';
+  import { MenuModeEnum, MenuLayoutEnum } from '/@/enums/menuEnum';
 
   const props = {
     /**
@@ -54,7 +54,7 @@
             } = appStore.getProjectConfig;
             appStore.setProjectConfig({
               menuSetting: {
-                type: MenuTypeEnum.SIDEBAR,
+                type: MenuLayoutEnum.SIDEBAR,
                 mode: MenuModeEnum.INLINE,
                 split: false,
               },

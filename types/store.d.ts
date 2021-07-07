@@ -1,5 +1,5 @@
 import { ErrorTypeEnum } from '/@/enums/exceptionEnum';
-import { MenuModeEnum, MenuTypeEnum } from '/@/enums/menuEnum';
+import { MenuModeEnum, MenuLayoutEnum } from '/@/enums/menuEnum';
 
 // Lock screen information
 export interface LockInfo {
@@ -53,5 +53,5 @@ export interface BeforeMiniState {
   menuCollapsed?: boolean;
   menuSplit?: boolean;
   menuMode?: MenuModeEnum;
-  menuType?: MenuTypeEnum;
+  menuType?: MenuLayoutEnum;
 }

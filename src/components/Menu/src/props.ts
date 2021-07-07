@@ -1,7 +1,7 @@
 import type { Menu } from '/@/router/types';
 import type { PropType } from 'vue';
 
-import { MenuModeEnum, MenuTypeEnum } from '/@/enums/menuEnum';
+import { MenuModeEnum, MenuLayoutEnum } from '/@/enums/menuEnum';
 import { ThemeEnum } from '/@/enums/appEnum';
 import { propTypes } from '/@/utils/propTypes';
 export const basicProps = {
@@ -19,8 +19,8 @@ export const basicProps = {
   },
 
   type: {
-    type: String as PropType<MenuTypeEnum>,
-    default: MenuTypeEnum.MIX,
+    type: String as PropType<MenuLayoutEnum>,
+    default: MenuLayoutEnum.MIX,
   },
   theme: propTypes.string.def(ThemeEnum.DARK),
   inlineCollapsed: propTypes.bool,

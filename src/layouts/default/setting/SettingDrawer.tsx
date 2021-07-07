@@ -12,7 +12,7 @@ import {
 
 import { AppDarkModeToggle } from '/@/components/Application';
 
-import { MenuTypeEnum, TriggerEnum } from '/@/enums/menuEnum';
+import { MenuLayoutEnum, TriggerEnum } from '/@/enums/menuEnum';
 
 import { useRootSetting } from '/@/hooks/setting/useRootSetting';
 import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
@@ -161,7 +161,7 @@ export default defineComponent({
             title={t('layout.setting.splitMenu')}
             event={HandlerEnum.MENU_SPLIT}
             def={unref(getSplit)}
-            disabled={!unref(getShowMenuRef) || unref(getMenuType) !== MenuTypeEnum.MIX}
+            disabled={!unref(getShowMenuRef) || unref(getMenuType) !== MenuLayoutEnum.MIX}
           />
           <SwitchItem
             title={t('layout.setting.mixSidebarFixed')}

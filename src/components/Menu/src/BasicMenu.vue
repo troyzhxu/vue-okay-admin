@@ -22,7 +22,7 @@
   import { computed, defineComponent, unref, reactive, watch, toRefs, ref } from 'vue';
   import { Menu } from 'ant-design-vue';
   import BasicSubMenuItem from './components/BasicSubMenuItem.vue';
-  import { MenuModeEnum, MenuTypeEnum } from '/@/enums/menuEnum';
+  import { MenuModeEnum, MenuLayoutEnum } from '/@/enums/menuEnum';
   import { useOpenKeys } from './useOpenKeys';
   import { RouteLocationNormalizedLoaded, useRouter } from 'vue-router';
   import { isFunction } from '/@/utils/is';
@@ -71,7 +71,7 @@
         const { type, mode } = props;
 
         return (
-          (type === MenuTypeEnum.TOP_MENU && mode === MenuModeEnum.HORIZONTAL) ||
+          (type === MenuLayoutEnum.TOP_MENU && mode === MenuModeEnum.HORIZONTAL) ||
           (props.isHorizontal && unref(getSplit))
         );
       });

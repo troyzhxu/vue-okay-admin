@@ -1,5 +1,10 @@
 import type { ProjectConfig } from '/#/config';
-import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from '/@/enums/menuEnum';
+import {
+  MenuLayoutEnum,
+  MenuModeEnum,
+  TriggerEnum,
+  MixSidebarTriggerEnum,
+} from '/@/enums/menuEnum';
 import { CacheTypeEnum } from '/@/enums/cacheEnum';
 import {
   ContentEnum,
@@ -97,7 +102,7 @@ const setting: ProjectConfig = {
     // Menu mode
     mode: MenuModeEnum.INLINE,
     // Menu type
-    type: MenuTypeEnum.SIDEBAR,
+    type: MenuLayoutEnum.SIDEBAR,
     // Menu theme
     theme: ThemeEnum.DARK,
     // Split menu

@@ -1,7 +1,7 @@
 import { ContentEnum, RouterTransitionEnum } from '/@/enums/appEnum';
 import {
   MenuModeEnum,
-  MenuTypeEnum,
+  MenuLayoutEnum,
   TopMenuAlignEnum,
   TriggerEnum,
   MixSidebarTriggerEnum,
@@ -124,23 +124,23 @@ export const menuTypeList = [
   {
     title: t('layout.setting.menuTypeSidebar'),
     mode: MenuModeEnum.INLINE,
-    type: MenuTypeEnum.SIDEBAR,
+    type: MenuLayoutEnum.SIDEBAR,
   },
   {
     title: t('layout.setting.menuTypeMix'),
     mode: MenuModeEnum.INLINE,
-    type: MenuTypeEnum.MIX,
+    type: MenuLayoutEnum.MIX,
   },
 
   {
     title: t('layout.setting.menuTypeTopMenu'),
     mode: MenuModeEnum.HORIZONTAL,
-    type: MenuTypeEnum.TOP_MENU,
+    type: MenuLayoutEnum.TOP_MENU,
   },
   {
     title: t('layout.setting.menuTypeMixSidebar'),
     mode: MenuModeEnum.INLINE,
-    type: MenuTypeEnum.MIX_SIDEBAR,
+    type: MenuLayoutEnum.MIX_SIDEBAR,
   },
 ];
 

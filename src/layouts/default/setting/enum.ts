@@ -120,25 +120,25 @@ export const routerTransitionOptions = [
   };
 });
 
-export const menuTypeList = [
+export const menuLayoutList = [
   {
-    title: t('layout.setting.menuTypeSidebar'),
+    title: t('layout.setting.menuLayoutSidebar'),
     mode: MenuModeEnum.INLINE,
     type: MenuLayoutEnum.SIDEBAR,
   },
   {
-    title: t('layout.setting.menuTypeMix'),
+    title: t('layout.setting.menuLayoutMix'),
     mode: MenuModeEnum.INLINE,
     type: MenuLayoutEnum.MIX,
   },
 
   {
-    title: t('layout.setting.menuTypeTopMenu'),
+    title: t('layout.setting.menuLayoutTopMenu'),
     mode: MenuModeEnum.HORIZONTAL,
     type: MenuLayoutEnum.TOP_MENU,
   },
   {
-    title: t('layout.setting.menuTypeMixSidebar'),
+    title: t('layout.setting.menuLayoutMixSidebar'),
     mode: MenuModeEnum.INLINE,
     type: MenuLayoutEnum.MIX_SIDEBAR,
   },

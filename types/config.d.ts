@@ -112,7 +112,7 @@ export interface ProjectConfig {
   showLogo: boolean;
   // Whether to show the global footer
   showFooter: boolean;
-  // menuType: MenuLayoutEnum;
+  // menuLayout: MenuLayoutEnum;
   headerSetting: HeaderSetting;
   // menuSetting
   menuSetting: MenuSetting;

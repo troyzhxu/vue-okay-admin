@@ -53,5 +53,5 @@ export interface BeforeMiniState {
   menuCollapsed?: boolean;
   menuSplit?: boolean;
   menuMode?: MenuModeEnum;
-  menuType?: MenuLayoutEnum;
+  menuLayout?: MenuLayoutEnum;
 }

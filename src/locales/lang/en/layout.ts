@@ -40,10 +40,10 @@ export default {
     menuTriggerBottom: 'Bottom',
     menuTriggerTop: 'Top',
     // menu type
-    menuTypeSidebar: 'Left menu mode',
-    menuTypeMixSidebar: 'Left menu mixed mode',
-    menuTypeMix: 'Top Menu Mix mode',
-    menuTypeTopMenu: 'Top menu mode',
+    menuLayoutSidebar: 'Left menu mode',
+    menuLayoutMixSidebar: 'Left menu mixed mode',
+    menuLayoutMix: 'Top Menu Mix mode',
+    menuLayoutTopMenu: 'Top menu mode',
 
     on: 'On',
     off: 'Off',

@@ -46,7 +46,7 @@
             isSetState.value = true;
             const {
               menuSetting: {
-                type: menuType,
+                type: menuLayout,
                 mode: menuMode,
                 collapsed: menuCollapsed,
                 split: menuSplit,
@@ -59,15 +59,15 @@
                 split: false,
               },
             });
-            appStore.setBeforeMiniInfo({ menuMode, menuCollapsed, menuType, menuSplit });
+            appStore.setBeforeMiniInfo({ menuMode, menuCollapsed, menuLayout, menuSplit });
           }
         } else {
           if (unref(isSetState)) {
             isSetState.value = false;
-            const { menuMode, menuCollapsed, menuType, menuSplit } = appStore.getBeforeMiniInfo;
+            const { menuMode, menuCollapsed, menuLayout, menuSplit } = appStore.getBeforeMiniInfo;
             appStore.setProjectConfig({
               menuSetting: {
-                type: menuType,
+                type: menuLayout,
                 mode: menuMode,
                 collapsed: menuCollapsed,
                 split: menuSplit,

@@ -19,13 +19,6 @@ export interface RequestOptions {
   withToken?: boolean;
 }
 
-export interface Result<T = any> {
-  code: number;
-  type: 'success' | 'error' | 'warning';
-  message: string;
-  result: T;
-}
-
 // multipart/form-data: upload file
 export interface UploadFileParams {
   // Other parameters

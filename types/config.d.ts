@@ -27,7 +27,7 @@ export interface MenuSetting {
   split: boolean;
   menuWidth: number;
   mode: MenuModeEnum;
-  type: MenuLayoutEnum;
+  layout: MenuLayoutEnum;
   theme: ThemeEnum;
   topMenuAlign: 'start' | 'center' | 'end';
   trigger: TriggerEnum;

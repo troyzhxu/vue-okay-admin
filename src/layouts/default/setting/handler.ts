@@ -25,13 +25,13 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
   const { getThemeColor, getDarkMode } = useRootSetting();
   switch (event) {
     case HandlerEnum.CHANGE_LAYOUT:
-      const { mode, type, split } = value;
+      const { mode, layout, split } = value;
       const splitOpt = split === undefined ? { split } : {};
 
       return {
         menuSetting: {
           mode,
-          type,
+          layout,
           collapsed: false,
           show: true,
           hidden: false,

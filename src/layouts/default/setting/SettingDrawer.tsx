@@ -103,7 +103,7 @@ export default defineComponent({
             handler={(item: typeof menuLayoutList[0]) => {
               baseHandler(HandlerEnum.CHANGE_LAYOUT, {
                 mode: item.mode,
-                type: item.type,
+                layout: item.layout,
                 split: unref(getIsHorizontal) ? false : undefined,
               });
             }}

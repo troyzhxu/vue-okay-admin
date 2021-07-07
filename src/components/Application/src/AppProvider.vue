@@ -46,7 +46,7 @@
             isSetState.value = true;
             const {
               menuSetting: {
-                type: menuLayout,
+                layout: menuLayout,
                 mode: menuMode,
                 collapsed: menuCollapsed,
                 split: menuSplit,
@@ -54,7 +54,7 @@
             } = appStore.getProjectConfig;
             appStore.setProjectConfig({
               menuSetting: {
-                type: MenuLayoutEnum.SIDEBAR,
+                layout: MenuLayoutEnum.SIDEBAR,
                 mode: MenuModeEnum.INLINE,
                 split: false,
               },
@@ -67,7 +67,7 @@
             const { menuMode, menuCollapsed, menuLayout, menuSplit } = appStore.getBeforeMiniInfo;
             appStore.setProjectConfig({
               menuSetting: {
-                type: menuLayout,
+                layout: menuLayout,
                 mode: menuMode,
                 collapsed: menuCollapsed,
                 split: menuSplit,

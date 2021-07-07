@@ -124,23 +124,22 @@ export const menuLayoutList = [
   {
     title: t('layout.setting.menuLayoutSidebar'),
     mode: MenuModeEnum.INLINE,
-    type: MenuLayoutEnum.SIDEBAR,
+    layout: MenuLayoutEnum.SIDEBAR,
   },
   {
     title: t('layout.setting.menuLayoutMix'),
     mode: MenuModeEnum.INLINE,
-    type: MenuLayoutEnum.MIX,
+    layout: MenuLayoutEnum.MIX,
   },
-
   {
     title: t('layout.setting.menuLayoutTopMenu'),
     mode: MenuModeEnum.HORIZONTAL,
-    type: MenuLayoutEnum.TOP_MENU,
+    layout: MenuLayoutEnum.TOP_MENU,
   },
   {
     title: t('layout.setting.menuLayoutMixSidebar'),
     mode: MenuModeEnum.INLINE,
-    type: MenuLayoutEnum.MIX_SIDEBAR,
+    layout: MenuLayoutEnum.MIX_SIDEBAR,
   },
 ];
 

@@ -23,10 +23,10 @@ export const useLockStore = defineStore({
   actions: {
     setLockInfo(info: LockInfo) {
       this.lockInfo = Object.assign({}, this.lockInfo, info);
-      Persistent.setLocal(LOCK_INFO_KEY, this.lockInfo, true);
+      Persistent.setLocal(LOCK_INFO_KEY, this.lockInfo);
     },
     resetLockInfo() {
-      Persistent.removeLocal(LOCK_INFO_KEY, true);
+      Persistent.removeLocal(LOCK_INFO_KEY);
       this.lockInfo = null;
     },
     // Unlock

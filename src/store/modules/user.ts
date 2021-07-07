@@ -5,7 +5,7 @@ import { store } from '/@/store';
 import { RoleEnum } from '/@/enums/roleEnum';
 import { PageEnum } from '/@/enums/pageEnum';
 import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
-import { getAuthCache, setAuthCache } from '/@/utils/auth';
+import { Persistent } from '/@/utils/cache/persistent';
 import { GetUserInfoModel, LoginParams } from '/@/api/sys/model/userModel';
 import { doLogout, getUserInfo, loginApi } from '/@/api/sys/user';
 import { useI18n } from '/@/hooks/web/useI18n';
@@ -14,7 +14,7 @@ import { router } from '/@/router';
 
 interface UserState {
   userInfo: Nullable<UserInfo>;
-  token?: string;
+  token: Nullable<string>;
   roleList: RoleEnum[];
   sessionTimeout?: boolean;
 }
@@ -23,40 +23,40 @@ export const useUserStore = defineStore({
   id: 'app-user',
   state: (): UserState => ({
     // user info
-    userInfo: null,
+    userInfo: Persistent.getLocal<UserInfo>(USER_INFO_KEY),
     // token
-    token: undefined,
+    token: Persistent.getLocal(TOKEN_KEY),
     // roleList
-    roleList: [],
+    roleList: Persistent.getLocal(ROLES_KEY) || [],
     // Whether the login expired
     sessionTimeout: false,
   }),
   getters: {
-    getUserInfo(): UserInfo {
-      return this.userInfo || getAuthCache<UserInfo>(USER_INFO_KEY) || {};
+    getUserInfo(): Nullable<UserInfo> {
+      return this.userInfo;
     },
-    getToken(): string {
-      return this.token || getAuthCache<string>(TOKEN_KEY);
+    getToken(): Nullable<string> {
+      return this.token;
     },
     getRoleList(): RoleEnum[] {
-      return this.roleList.length > 0 ? this.roleList : getAuthCache<RoleEnum[]>(ROLES_KEY);
+      return this.roleList;
     },
     getSessionTimeout(): boolean {
       return !!this.sessionTimeout;
     },
   },
   actions: {
-    setToken(info: string | undefined) {
+    setToken(info: Nullable<string>) {
       this.token = info;
-      setAuthCache(TOKEN_KEY, info);
+      Persistent.setLocal(TOKEN_KEY, info);
     },
     setRoleList(roleList: RoleEnum[]) {
       this.roleList = roleList;
-      setAuthCache(ROLES_KEY, roleList);
+      Persistent.setLocal(ROLES_KEY, roleList);
     },
     setUserInfo(info: UserInfo) {
       this.userInfo = info;
-      setAuthCache(USER_INFO_KEY, info);
+      Persistent.setLocal(USER_INFO_KEY, info);
     },
     setSessionTimeout(flag: boolean) {
       this.sessionTimeout = flag;
@@ -111,7 +111,7 @@ export const useUserStore = defineStore({
       } catch {
         console.log('注销Token失败');
       }
-      this.setToken(undefined);
+      this.setToken(null);
       this.setSessionTimeout(false);
       goLogin && router.push(PageEnum.BASE_LOGIN);
     },

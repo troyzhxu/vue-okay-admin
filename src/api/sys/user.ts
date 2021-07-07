@@ -19,7 +19,7 @@ export function loginApi(params: LoginParams, showErr = true) {
       params,
     },
     {
-      errorMessageMode: showErr ? 'modal' : 'none',
+      errMsgMode: showErr ? 'modal' : 'none',
     }
   );
 }
@@ -35,7 +35,7 @@ export function refreshToken(refreshToken: string) {
     },
     {
       withToken: false,
-      errorMessageMode: 'none',
+      errMsgMode: 'none',
     }
   );
 }

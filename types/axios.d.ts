@@ -1,4 +1,4 @@
-export type ErrorMessageMode = 'none' | 'modal' | 'message' | undefined;
+export type ErrMsgMode = 'none' | 'modal' | 'message' | undefined;
 
 export interface RequestOptions {
   // Splicing request parameters to url
@@ -15,7 +15,7 @@ export interface RequestOptions {
   // Interface address, use the default apiUrl if you leave it blank
   apiUrl?: string;
   // Error message prompt type
-  errorMessageMode?: ErrorMessageMode;
+  errMsgMode?: ErrMsgMode;
   // Whether to add a timestamp
   joinTime?: boolean;
   ignoreCancelToken?: boolean;

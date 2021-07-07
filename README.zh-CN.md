@@ -32,14 +32,7 @@ Vue Vben Admin 是一个免费开源的中后台模版。使用了最新的`vue3
 
 <p align="center">
     <img alt="VbenAdmin Logo" width="100%" src="https://anncwb.github.io/anncwb/images/preview2.png">
-    <img alt="VbenAdmin Logo" width="100%" src="https://anncwb.github.io/anncwb/images/preview3.png">
 </p>
-
-### 使用 Gitpod
-
-在 Gitpod（适用于 GitHub 的免费在线开发环境）中打开项目，并立即开始编码.
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/anncwb/vue-vben-admin)
 
 ## 文档
 

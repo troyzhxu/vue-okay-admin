@@ -1,5 +1,5 @@
 import { MenuModeEnum } from '/@/enums/menuEnum';
-import type { Menu } from '/@/router/types';
+import type { Menu as TMenu } from '/@/router/types';
 import type { MenuState } from './types';
 
 import { computed, Ref, toRaw } from 'vue';
@@ -12,7 +12,7 @@ import { useTimeoutFn } from '/@/hooks/core/useTimeout';
 
 export function useOpenKeys(
   menuState: MenuState,
-  menus: Ref<Menu[]>,
+  menus: Ref<TMenu[]>,
   mode: Ref<MenuModeEnum>,
   accordion: Ref<boolean>
 ) {

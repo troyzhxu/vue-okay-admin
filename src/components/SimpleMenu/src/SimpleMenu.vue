@@ -19,7 +19,7 @@
 </template>
 <script lang="ts">
   import type { MenuState } from './types';
-  import type { Menu as MenuType } from '/@/router/types';
+  import type { Menu as TMenu } from '/@/router/types';
   import type { RouteLocationNormalizedLoaded } from 'vue-router';
   import { defineComponent, computed, ref, unref, reactive, toRefs, watch } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
@@ -42,7 +42,7 @@
     inheritAttrs: false,
     props: {
       items: {
-        type: Array as PropType<MenuType[]>,
+        type: Array as PropType<TMenu[]>,
         default: () => [],
       },
       collapse: propTypes.bool,

@@ -1,4 +1,4 @@
-import type { Menu as MenuType } from '/@/router/types';
+import type { Menu as TMenu } from '/@/router/types';
 import type { MenuState } from './types';
 
 import { computed, Ref, toRaw } from 'vue';
@@ -12,7 +12,7 @@ import { useDebounceFn } from '@vueuse/core';
 
 export function useOpenKeys(
   menuState: MenuState,
-  menus: Ref<MenuType[]>,
+  menus: Ref<TMenu[]>,
   accordion: Ref<boolean>,
   mixSider: Ref<boolean>,
   collapse: Ref<boolean>

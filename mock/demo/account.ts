@@ -1,5 +1,4 @@
 import { MockMethod } from 'vite-plugin-mock';
-import { resultSuccess, resultError } from '../_util';
 
 const userInfo = {
   name: 'Vben',
@@ -48,15 +47,7 @@ export default [
     timeout: 1000,
     method: 'get',
     response: () => {
-      return resultSuccess(userInfo);
-    },
-  },
-  {
-    url: '/basic-api/user/sessionTimeout',
-    method: 'post',
-    statusCode: 401,
-    response: () => {
-      return resultError();
+      return userInfo;
     },
   },
 ] as MockMethod[];

@@ -1,5 +1,4 @@
 import { MockMethod } from 'vite-plugin-mock';
-import { resultSuccess } from '../_util';
 
 const list: any[] = [];
 const demoList = (() => {
@@ -22,7 +21,7 @@ export default [
     method: 'post',
     response: ({ query }) => {
       console.log(query);
-      return resultSuccess(demoList);
+      return demoList;
     },
   },
 ] as MockMethod[];

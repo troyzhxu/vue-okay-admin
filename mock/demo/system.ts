@@ -1,5 +1,5 @@
 import { MockMethod } from 'vite-plugin-mock';
-import { resultPageSuccess, resultSuccess } from '../_util';
+import { resultPageSuccess } from '../_util';
 
 const accountList = (() => {
   const result: any[] = [];
@@ -158,7 +158,7 @@ export default [
     method: 'post',
     response: ({ query }) => {
       const { id, status } = query;
-      return resultSuccess({ id, status });
+      return { id, status };
     },
   },
   {
@@ -166,7 +166,7 @@ export default [
     timeout: 100,
     method: 'get',
     response: () => {
-      return resultSuccess(roleList);
+      return roleList;
     },
   },
   {
@@ -174,7 +174,7 @@ export default [
     timeout: 100,
     method: 'get',
     response: () => {
-      return resultSuccess(deptList);
+      return deptList;
     },
   },
   {
@@ -182,7 +182,7 @@ export default [
     timeout: 100,
     method: 'get',
     response: () => {
-      return resultSuccess(menuList);
+      return menuList;
     },
   },
 ] as MockMethod[];

@@ -32,6 +32,7 @@ declare module 'vue-router' {
     hideTab?: boolean;
     // Never show in menu
     hideMenu?: boolean;
+    // 是否是一个外部链接
     isLink?: boolean;
     // only build for Menu
     ignoreRoute?: boolean;

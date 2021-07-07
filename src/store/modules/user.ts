@@ -9,6 +9,7 @@ import { loginApi, getUserInfo, refreshToken } from '/@/api/sys/user';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { router } from '/@/router';
+import headerImg from '/@/assets/images/header.jpg';
 
 interface UserState {
   token: Nullable<AuthToken>;
@@ -45,6 +46,9 @@ export const useUserStore = defineStore({
     },
     getNickname(): string {
       return this.userInfo?.nickname || this.getUsername;
+    },
+    getAvatar(): string {
+      return this.userInfo?.avatar || headerImg;
     },
     getRoleList(): string[] {
       return this.userInfo?.roles || [];

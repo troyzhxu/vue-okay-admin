@@ -66,7 +66,6 @@ export default {
     feat: 'Page Function',
     icon: 'Icon',
     tabs: 'Tabs',
-    sessionTimeout: 'Session Timeout',
     print: 'Print',
     contextMenu: 'Context Menu',
     download: 'Download',

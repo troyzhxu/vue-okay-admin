@@ -21,11 +21,6 @@ export enum SettingButtonPositionEnum {
   FIXED = 'fixed',
 }
 
-export enum SessionTimeoutProcessingEnum {
-  ROUTE_JUMP,
-  PAGE_COVERAGE,
-}
-
 /**
  * 权限模式
  */

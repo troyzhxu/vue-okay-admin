@@ -14,7 +14,6 @@ import headerImg from '/@/assets/images/header.jpg';
 interface UserState {
   token: Nullable<AuthToken>;
   userInfo: Nullable<UserInfo>;
-  sessionTimeout?: boolean;
 }
 
 export const useUserStore = defineStore({
@@ -24,8 +23,6 @@ export const useUserStore = defineStore({
     token: Persistent.getLocal(TOKEN_KEY),
     // user info
     userInfo: Persistent.getLocal<UserInfo>(USER_INFO_KEY),
-    // Whether the login expired
-    sessionTimeout: false,
   }),
   getters: {
     getIsLogin(): boolean {
@@ -53,9 +50,6 @@ export const useUserStore = defineStore({
     getRoleList(): string[] {
       return this.userInfo?.roles || [];
     },
-    getSessionTimeout(): boolean {
-      return !!this.sessionTimeout;
-    },
   },
   actions: {
     setToken(model: TokenModel) {
@@ -70,9 +64,6 @@ export const useUserStore = defineStore({
     setUserInfo(info: UserInfo) {
       this.userInfo = info;
       Persistent.setLocal(USER_INFO_KEY, info);
-    },
-    setSessionTimeout(flag: boolean) {
-      this.sessionTimeout = flag;
     },
     resetState() {
       this.userInfo = null;

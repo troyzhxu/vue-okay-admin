@@ -1,8 +1,6 @@
 export type ErrMsgMode = 'none' | 'modal' | 'message' | undefined;
 
 export interface RequestOptions {
-  // Splicing request parameters to url
-  joinParamsToUrl?: boolean;
   // Format request parameter time
   formatDate?: boolean;
   // Whether to process the request result
@@ -12,8 +10,6 @@ export interface RequestOptions {
   isReturnNativeResponse?: boolean;
   // Whether to join url
   joinPrefix?: boolean;
-  // Interface address, use the default apiUrl if you leave it blank
-  apiUrl?: string;
   // Error message prompt type
   errMsgMode?: ErrMsgMode;
   // Whether to add a timestamp

@@ -118,6 +118,13 @@
   "i18n-ally.enabledParsers": ["ts"],
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.enabledFrameworks": ["vue", "react"],
+  "files.associations": {
+    ".env.development": "env",
+    ".env.production": "env",
+    ".env.staging": "env",
+    ".env.test": "env",
+    ".env.devp": "env"
+  },
   "cSpell.words": [
     "vben",
     "windi",

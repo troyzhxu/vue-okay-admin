@@ -8,6 +8,7 @@ import { useUserStoreWithOut } from '/@/store/modules/user';
 import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
 
 const LOGIN_PATH = PageEnum.BASE_LOGIN;
+const HOME_PATH = PageEnum.BASE_HOME;
 
 const whitePathList: PageEnum[] = [LOGIN_PATH];
 
@@ -21,16 +22,23 @@ export function createPermissionGuard(router: Router) {
       return;
     }
 
+    const isLogin = userStore.getIsLogin;
+
+    // 若已登录，不可再进入登录页
+    if (isLogin && to.path == LOGIN_PATH) {
+      console.log('Guard PER: redirct to home');
+      next(HOME_PATH);
+      return;
+    }
+
     // Whitelist can be directly entered
     if (whitePathList.includes(to.path as PageEnum)) {
       next();
       return;
     }
 
-    const token = userStore.getToken;
-
     // token does not exist
-    if (!token) {
+    if (!isLogin) {
       // You can access without permission. You need to set the routing meta.ignoreAuth to true
       if (to.meta.ignoreAuth) {
         next();

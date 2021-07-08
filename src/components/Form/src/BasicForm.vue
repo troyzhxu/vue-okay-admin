@@ -39,7 +39,7 @@
 <script lang="ts">
   import type { FormActionType, FormProps, FormSchema } from './types/form';
   import type { AdvanceState } from './types/hooks';
-  import type { Ref } from 'vue';
+  import type { CSSProperties, Ref } from 'vue';
 
   import { defineComponent, reactive, ref, computed, unref, onMounted, watch, nextTick } from 'vue';
   import { Form, Row } from 'ant-design-vue';
@@ -103,13 +103,17 @@
       });
 
       // Get uniform row style and Row configuration for the entire form
-      const getRow = computed((): RowProps => {
-        const { baseRowStyle = {}, rowProps } = unref(getProps);
-        return {
-          style: baseRowStyle,
-          ...rowProps,
-        };
-      });
+      const getRow = computed(
+        (): RowProps & {
+          style: CSSProperties;
+        } => {
+          const { baseRowStyle = {}, rowProps } = unref(getProps);
+          return {
+            style: baseRowStyle,
+            ...rowProps,
+          };
+        }
+      );
 
       const getBindValue = computed(
         () => ({ ...attrs, ...props, ...unref(getProps) } as Recordable)

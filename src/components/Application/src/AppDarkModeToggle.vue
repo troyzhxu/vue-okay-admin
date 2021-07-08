@@ -1,9 +1,9 @@
 <template>
   <div v-if="getShowDarkModeToggle" :class="getClass" @click="toggleDarkMode">
     <div :class="`${prefixCls}-inner`"> </div>
-    <SvgIcon size="14" name="auto" style="z-index: 10" />
-    <SvgIcon size="12" name="moon" style="z-index: 10; margin: 1px" />
-    <SvgIcon size="14" name="sun" style="z-index: 10" />
+    <SvgIcon size="14" name="auto" style="z-index: 1" />
+    <SvgIcon size="12" name="moon" style="z-index: 1; margin: 1px" />
+    <SvgIcon size="14" name="sun" style="z-index: 1" />
   </div>
 </template>
 <script lang="ts">

@@ -35,7 +35,7 @@ const transform: AxiosTransform = {
   transformRequestHook: (res: AxiosResponse, options: RequestOptions) => {
     const { isReturnNativeResponse } = options;
     // 是否返回原生响应头 比如：需要获取响应头时使用该属性
-    if (isReturnNativeResponse) {
+    if (isReturnNativeResponse || !res) {
       return res;
     }
     return res.data;
@@ -79,18 +79,16 @@ const transform: AxiosTransform = {
     errorLogStore.addAjaxErrorInfo(error);
     const { code, message } = error || {};
     const err: string = error?.toString?.() ?? '';
-    try {
-      if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
-        createMessage.error(t('sys.api.apiTimeoutMessage'));
-      }
-      if (err?.includes('Network Error')) {
-        createErrorModal({
-          title: t('sys.api.networkException'),
-          content: t('sys.api.networkExceptionMsg'),
-        });
-      }
-    } catch (error) {
-      throw new Error(error);
+    if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
+      createMessage.error(t('sys.api.apiTimeoutMessage'));
+      return;
+    }
+    if (err?.includes('Network Error')) {
+      createErrorModal({
+        title: t('sys.api.networkException'),
+        content: t('sys.api.networkExceptionMsg'),
+      });
+      return;
     }
     return Promise.reject(error);
   },
@@ -126,8 +124,6 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           joinPrefix: true,
           // 是否返回原生响应头 比如：需要获取响应头时使用该属性
           isReturnNativeResponse: false,
-          // 需要对返回数据进行处理
-          isTransformRequestResult: true,
           // 格式化提交参数时间
           formatDate: true,
           // 消息提示类型

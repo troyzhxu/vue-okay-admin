@@ -1,6 +1,7 @@
-import type { RouteLocationNormalized } from 'vue-router';
-import type { LockInfo, AuthToken, UserInfo } from '/#/store';
-import type { LocaleSetting, ProjectConfig } from '/#/config';
+import { toRaw } from 'vue';
+import { RouteLocationNormalized } from 'vue-router';
+import { LockInfo, AuthToken, UserInfo } from '/#/store';
+import { LocaleSetting, ProjectConfig } from '/#/config';
 import { createLocalStorage, createSessionStorage } from '/@/utils/cache';
 import {
   LOCALE_KEY,
@@ -11,7 +12,6 @@ import {
   PROJ_CFG_KEY,
   MULTIPLE_TABS_KEY,
 } from '/@/enums/cacheEnum';
-import { toRaw } from 'vue';
 
 interface BasicStore {
   [LOCALE_KEY]: LocaleSetting;

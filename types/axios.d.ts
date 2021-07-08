@@ -3,8 +3,6 @@ export type ErrMsgMode = 'none' | 'modal' | 'message' | undefined;
 export interface RequestOptions {
   // Format request parameter time
   formatDate?: boolean;
-  // Whether to process the request result
-  isTransformResponse?: boolean;
   // Whether to return native response headers
   // For example: use this attribute when you need to get the response headers
   isReturnNativeResponse?: boolean;

@@ -44,7 +44,7 @@
     emits: ['menuClick'],
     setup(props, { emit }) {
       const isClickGo = ref(false);
-      const currentActiveMenu = ref('');
+      const activeMenu = ref('');
 
       const menuState = reactive<MenuState>({
         defaultSelectedKeys: [],
@@ -101,11 +101,11 @@
       listenerRouteChange((route) => {
         if (route.name === REDIRECT_NAME) return;
         handleMenuChange(route);
-        currentActiveMenu.value = route.meta?.currentActiveMenu as string;
+        activeMenu.value = route.meta?.activeMenu as string;
 
-        if (unref(currentActiveMenu)) {
-          menuState.selectedKeys = [unref(currentActiveMenu)];
-          setOpenKeys(unref(currentActiveMenu));
+        if (unref(activeMenu)) {
+          menuState.selectedKeys = [unref(activeMenu)];
+          setOpenKeys(unref(activeMenu));
         }
       });
 
@@ -139,7 +139,7 @@
         }
         const path = (route || unref(currentRoute)).path;
         setOpenKeys(path);
-        if (unref(currentActiveMenu)) return;
+        if (unref(activeMenu)) return;
         if (props.isHorizontal && unref(getSplit)) {
           const parentPath = await getCurrentParentPath(path);
           menuState.selectedKeys = [parentPath];

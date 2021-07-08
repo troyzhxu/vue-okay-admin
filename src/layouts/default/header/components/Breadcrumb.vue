@@ -59,8 +59,8 @@
         const cur = routeMatched?.[routeMatched.length - 1];
         let path = currentRoute.value.path;
 
-        if (cur && cur?.meta?.currentActiveMenu) {
-          path = cur.meta.currentActiveMenu as string;
+        if (cur && cur?.meta?.activeMenu) {
+          path = cur.meta.activeMenu as string;
         }
 
         const parent = getAllParentPath(menus, path);
@@ -71,7 +71,7 @@
 
         const breadcrumbList = filterItem(matched);
 
-        if (currentRoute.value.meta?.currentActiveMenu) {
+        if (currentRoute.value.meta?.activeMenu) {
           breadcrumbList.push({
             ...currentRoute.value,
             name: currentRoute.value.meta?.title || currentRoute.value.name,

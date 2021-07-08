@@ -27,7 +27,7 @@ declare module 'vue-router' {
     // Used internally to mark single-level menus
     single?: boolean;
     // Currently active menu
-    currentActiveMenu?: string;
+    activeMenu?: string;
     // Never show in tab
     hideTab?: boolean;
     // Never show in menu

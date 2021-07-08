@@ -547,7 +547,7 @@
 - 新增左侧菜单混合模式
 - 新增 markdown 嵌入表单内示例
 - 新增主框架外页面示例
-- `route.meta` 新增`currentActiveMenu`,`hideTab`,`hideMenu`参数 用于控制详情页面包屑级菜单显示隐藏。
+- `route.meta` 新增`activeMenu`,`hideTab`,`hideMenu`参数 用于控制详情页面包屑级菜单显示隐藏。
 - 新增面包屑导航示例
 - form: 新增`suffix`属性，用于配置后缀内容
 - form: 新增远程下拉`ApiSelect`及示例

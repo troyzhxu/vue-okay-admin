@@ -94,17 +94,15 @@
         }
 
         const { path, fullPath, meta = {} } = route;
-        const { currentActiveMenu, hideTab } = meta as RouteMeta;
-        const isHide = !hideTab ? null : currentActiveMenu;
+        const { activeMenu, hideTab } = meta as RouteMeta;
+        const isHide = !hideTab ? null : activeMenu;
         const p = isHide || fullPath || path;
         if (activeKeyRef.value !== p) {
           activeKeyRef.value = p as string;
         }
 
         if (isHide) {
-          const findParentRoute = router
-            .getRoutes()
-            .find((item) => item.path === currentActiveMenu);
+          const findParentRoute = router.getRoutes().find((item) => item.path === activeMenu);
 
           findParentRoute && tabStore.addTab(findParentRoute as unknown as RouteLocationNormalized);
         } else {

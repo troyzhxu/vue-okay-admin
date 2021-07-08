@@ -57,7 +57,7 @@
     },
     emits: ['menuClick'],
     setup(props, { attrs, emit }) {
-      const currentActiveMenu = ref('');
+      const activeMenu = ref('');
       const isClickGo = ref(false);
 
       const menuState = reactive<MenuState>({
@@ -106,12 +106,12 @@
       listenerRouteChange((route) => {
         if (route.name === REDIRECT_NAME) return;
 
-        currentActiveMenu.value = route.meta?.currentActiveMenu as string;
+        activeMenu.value = route.meta?.activeMenu as string;
         handleMenuChange(route);
 
-        if (unref(currentActiveMenu)) {
-          menuState.activeName = unref(currentActiveMenu);
-          setOpenKeys(unref(currentActiveMenu));
+        if (unref(activeMenu)) {
+          menuState.activeName = unref(activeMenu);
+          setOpenKeys(unref(activeMenu));
         }
       });
 

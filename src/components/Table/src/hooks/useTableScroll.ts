@@ -10,7 +10,7 @@ import { useDebounceFn } from '@vueuse/core';
 
 export function useTableScroll(
   propsRef: ComputedRef<BasicTableProps>,
-  tableElRef: Ref<ComponentRef>,
+  tableElRef: Ref<ComponentRef | undefined>,
   columnsRef: ComputedRef<BasicColumn[]>,
   rowSelectionRef: ComputedRef<TableRowSelection<any> | null>,
   getDataSourceRef: ComputedRef<Recordable[]>

@@ -11,7 +11,7 @@ export function useTableFooter(
     y: Nullable<number>;
     scrollToFirstRowOnChange: boolean;
   }>,
-  tableElRef: Ref<ComponentRef>,
+  tableElRef: Ref<ComponentRef | undefined>,
   getDataSourceRef: ComputedRef<Recordable>
 ) {
   const getIsEmptyData = computed(() => {

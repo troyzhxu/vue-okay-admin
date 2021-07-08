@@ -1,4 +1,4 @@
-import type { Ref } from 'vue';
+import type { Ref, UnwrapRef } from 'vue';
 
 import { ref, watch, unref } from 'vue';
 import { useThrottleFn, useDebounceFn } from '@vueuse/core';
@@ -28,15 +28,16 @@ export function useEventListener({
   const isAddRef = ref(false);
 
   if (el) {
-    const element: Ref<Element> = ref(el as Element);
+    const element: Ref<UnwrapRef<Element>> = ref(el as Element);
 
     const handler = isDebounce ? useDebounceFn(listener, wait) : useThrottleFn(listener, wait);
     const realHandler = wait ? handler : listener;
-    const removeEventListener = (e: Element) => {
+    const removeEventListener = (e: UnwrapRef<Element>) => {
       isAddRef.value = true;
       e.removeEventListener(name, realHandler, options);
     };
-    const addEventListener = (e: Element) => e.addEventListener(name, realHandler, options);
+    const addEventListener = (e: UnwrapRef<Element>) =>
+      e.addEventListener(name, realHandler, options);
 
     const removeWatch = watch(
       element,

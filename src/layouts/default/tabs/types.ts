@@ -21,5 +21,4 @@ export enum MenuEventEnum {
   CLOSE_RIGHT,
   CLOSE_OTHER,
   CLOSE_ALL,
-  SCALE,
 }

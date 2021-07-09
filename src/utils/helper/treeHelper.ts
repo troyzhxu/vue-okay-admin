@@ -1,3 +1,5 @@
+import { cloneDeep } from 'lodash-es';
+
 interface TreeHelperConfig {
   id: string;
   children: string;
@@ -185,5 +187,62 @@ export function treeMapEach(
     return {
       ...conversionData,
     };
+  }
+}
+
+/**
+ * @description: 检索树，按源数据结构输出，若父节点匹配，则其所有子节点自动匹配，若某子节点匹配，则其直系父节点都匹配
+ * @param sourceList     源数据
+ * @param childrenKey    默认子节点名称
+ * @param matchFunc      匹配函数
+ */
+export function searchTree<T>(
+  sourceList: T[],
+  matchFunc: (item: T) => boolean,
+  childrenKey = 'children'
+): T[] {
+  const list: T[] = [];
+  sourceList.forEach((item) => {
+    if (matchFunc(item)) {
+      list.push(item);
+    } else {
+      const children = item[childrenKey];
+      if (children) {
+        const matchedChildren = searchTree(children, matchFunc, childrenKey);
+        if (matchedChildren.length) {
+          const newItem = cloneDeep(item);
+          newItem[childrenKey] = matchedChildren;
+          list.push(newItem);
+        }
+      }
+    }
+  });
+  return list;
+}
+
+/**
+ * @description: 检索树，按源数据结构输出，若父节点匹配，则其所有子节点自动匹配，若某子节点匹配，则其直系父节点都匹配
+ * @param sourceList     源数据
+ * @param matchFunc      匹配函数
+ * @param childrenKey    子节点名称
+ */
+export function searchTreeItem<T>(
+  sourceList: T[],
+  matchFunc: (item: T) => boolean,
+  childrenKey = 'children'
+): T | undefined {
+  for (let i = 0; i < sourceList.length; i++) {
+    const item = sourceList[i];
+    if (matchFunc(item)) {
+      return item;
+    } else {
+      const children = item[childrenKey];
+      if (children) {
+        const child = searchTreeItem(children, matchFunc, childrenKey);
+        if (child) {
+          return child;
+        }
+      }
+    }
   }
 }

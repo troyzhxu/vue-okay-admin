@@ -44,9 +44,9 @@
       <div :class="`${prefixCls}-entry`" v-show="!showDate">
         <div :class="`${prefixCls}-entry-content`">
           <div :class="`${prefixCls}-entry__header enter-x`">
-            <img :src="userinfo.avatar || headerImg" :class="`${prefixCls}-entry__header-img`" />
+            <img :src="avatar" :class="`${prefixCls}-entry__header-img`" />
             <p :class="`${prefixCls}-entry__header-name`">
-              {{ userinfo.realName }}
+              {{ nickname }}
             </p>
           </div>
           <InputPassword
@@ -104,7 +104,6 @@
   import { useDesign } from '/@/hooks/web/useDesign';
 
   import { LockOutlined } from '@ant-design/icons-vue';
-  import headerImg from '/@/assets/images/header.jpg';
 
   export default defineComponent({
     name: 'LockPage',
@@ -123,10 +122,6 @@
       const { ...state } = useNow(true);
 
       const { t } = useI18n();
-
-      const userinfo = computed(() => {
-        return userStore.getUserInfo || {};
-      });
 
       /**
        * @description: unLock
@@ -154,9 +149,11 @@
         showDate.value = show;
       }
 
+      const avatar = computed(() => userStore.getAvatar);
+      const nickname = computed(() => userStore.getNickname);
+
       return {
         goLogin,
-        userinfo,
         unLock,
         errMsg,
         loading,
@@ -165,7 +162,8 @@
         showDate,
         password,
         handleShowForm,
-        headerImg,
+        avatar,
+        nickname,
         ...state,
       };
     },

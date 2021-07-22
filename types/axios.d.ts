@@ -10,8 +10,11 @@ export interface RequestOptions {
   joinPrefix?: boolean;
   // Error message prompt type
   errMsgMode?: ErrMsgMode;
-  // Whether to add a timestamp
+  // Whether to add a timestamp（默认 true）
   joinTime?: boolean;
+  // 是否携带语言参数（默认 true）
+  joinLocale?: boolean;
+  // 是否忽略取消
   ignoreCancelToken?: boolean;
   // Whether to send token in header
   withToken?: boolean;

@@ -14,16 +14,21 @@ import { useMessage } from '/@/hooks/web/useMessage';
 import { RequestEnum } from '/@/enums/httpEnum';
 
 import { deepMerge } from '/@/utils';
+import { useUserStoreWithOut } from '/@/store/modules/user';
+import { useLocaleStoreWithOut } from '/@/store/modules/locale';
 import { useErrorLogStoreWithOut } from '/@/store/modules/errorLog';
-import { useUserStore } from '/@/store/modules/user';
 
 import { useI18n } from '/@/hooks/web/useI18n';
-import { joinTimestamp, formatRequestDate } from './helper';
+import { joinTimestamp, formatRequestDate, joinLocalePara } from './helper';
 import { isObject } from '../is';
 
 const globSetting = useGlobSetting();
 const prefix = globSetting.urlPrefix;
 const { createMessage, createErrorModal } = useMessage();
+
+const userStore = useUserStoreWithOut();
+const localeStore = useLocaleStoreWithOut();
+const errorLogStore = useErrorLogStoreWithOut();
 
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -43,7 +48,7 @@ const transform: AxiosTransform = {
 
   // 请求之前处理config
   beforeRequestHook: (config, options) => {
-    const { joinPrefix, formatDate, joinTime = true } = options;
+    const { joinPrefix, formatDate, joinTime = true, joinLocale = true } = options;
     if (joinPrefix) {
       config.url = `${prefix}${config.url}`;
     }
@@ -51,16 +56,18 @@ const transform: AxiosTransform = {
       formatRequestDate(config.params);
     }
     if (config.method?.toUpperCase() === RequestEnum.GET) {
-      const params = config.params || {};
       // 给 get 请求加上时间戳参数，避免从缓存中拿数据。
-      config.params = Object.assign(params || {}, joinTimestamp(joinTime, false));
+      config.params = joinTimestamp(config.params, joinTime);
+    }
+    if (joinLocale) {
+      const locale = localeStore.getLocale;
+      config.params = joinLocalePara(config.params, locale);
     }
     return config;
   },
 
   asyncPreprocess: async (config: AxiosRequestConfig, options: RequestOptions) => {
     if (options.withToken) {
-      const userStore = useUserStore();
       const accessToken = await userStore.getAccessToken();
       if (!accessToken) {
         return null;
@@ -75,7 +82,6 @@ const transform: AxiosTransform = {
    */
   responseInterceptorsCatch: (error: any) => {
     const { t } = useI18n();
-    const errorLogStore = useErrorLogStoreWithOut();
     errorLogStore.addAjaxErrorInfo(error);
     const { code, message } = error || {};
     const err: string = error?.toString?.() ?? '';

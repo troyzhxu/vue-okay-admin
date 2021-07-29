@@ -200,9 +200,9 @@ export function searchTree<T, R>(
   sourceList: T[],
   matchFunc: (item: T) => boolean,
   options: {
-    childrenKey: string;
-    mapFunc: (item: T) => R;
-  }
+    childrenKey?: string;
+    mapFunc?: (item: T) => R;
+  } = {}
 ): R[] {
   const { childrenKey = 'children', mapFunc = (item) => item as unknown as R } = options;
   const list: R[] = [];

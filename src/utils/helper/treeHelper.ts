@@ -196,23 +196,27 @@ export function treeMapEach(
  * @param childrenKey    默认子节点名称
  * @param matchFunc      匹配函数
  */
-export function searchTree<T>(
+export function searchTree<T, R>(
   sourceList: T[],
   matchFunc: (item: T) => boolean,
-  childrenKey = 'children'
-): T[] {
-  const list: T[] = [];
+  options: {
+    childrenKey: string;
+    mapFunc: (item: T) => R;
+  }
+): R[] {
+  const { childrenKey = 'children', mapFunc = (item) => item as unknown as R } = options;
+  const list: R[] = [];
   sourceList.forEach((item) => {
     if (matchFunc(item)) {
-      list.push(item);
+      list.push(mapFunc(item));
     } else {
       const children = item[childrenKey];
       if (children) {
-        const matchedChildren = searchTree(children, matchFunc, childrenKey);
+        const matchedChildren = searchTree(children, matchFunc, { childrenKey, mapFunc });
         if (matchedChildren.length) {
           const newItem = cloneDeep(item);
           newItem[childrenKey] = matchedChildren;
-          list.push(newItem);
+          list.push(mapFunc(newItem));
         }
       }
     }

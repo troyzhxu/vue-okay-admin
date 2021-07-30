@@ -26,9 +26,17 @@ const globSetting = useGlobSetting();
 const prefix = globSetting.urlPrefix;
 const { createMessage, createErrorModal } = useMessage();
 
-const userStore = useUserStoreWithOut();
 const localeStore = useLocaleStoreWithOut();
 const errorLogStore = useErrorLogStoreWithOut();
+
+let userStore: any = null;
+
+function useUserStore() {
+  if (!userStore) {
+    userStore = useUserStoreWithOut();
+  }
+  return userStore;
+}
 
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -68,7 +76,7 @@ const transform: AxiosTransform = {
 
   asyncPreprocess: async (config: AxiosRequestConfig, options: RequestOptions) => {
     if (options.withToken) {
-      const accessToken = await userStore.getAccessToken();
+      const accessToken = await useUserStore().getAccessToken();
       if (!accessToken) {
         return null;
       }

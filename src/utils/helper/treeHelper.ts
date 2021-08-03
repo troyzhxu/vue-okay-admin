@@ -225,7 +225,7 @@ export function searchTree<T, R>(
 }
 
 /**
- * @description: 检索树，按源数据结构输出，若父节点匹配，则其所有子节点自动匹配，若某子节点匹配，则其直系父节点都匹配
+ * @description: 检索树，只返回一个节点
  * @param sourceList     源数据
  * @param matchFunc      匹配函数
  * @param childrenKey    子节点名称

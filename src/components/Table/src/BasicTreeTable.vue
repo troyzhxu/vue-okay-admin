@@ -36,11 +36,11 @@
 <script lang="ts">
   import { defineComponent, reactive, ref, unref } from 'vue';
   import { Button } from 'ant-design-vue';
-  import { TreeTable } from '/@/components/Table';
   import { BasicForm, FormProps } from '/@/components/Form';
   import { BasicTitle } from '/@/components/Basic';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { TableProps, TreeAction } from './types/treeTable';
+  import TreeTable from './TreeTable';
 
   export default defineComponent({
     name: 'BasicTreeTable',

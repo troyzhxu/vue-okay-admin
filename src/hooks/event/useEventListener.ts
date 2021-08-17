@@ -1,6 +1,4 @@
-import type { Ref, UnwrapRef } from 'vue';
-
-import { ref, watch, unref } from 'vue';
+import { ref, watch, unref, Ref, UnwrapRef } from 'vue';
 import { useThrottleFn, useDebounceFn } from '@vueuse/core';
 
 export type RemoveEventFn = () => void;
@@ -14,6 +12,7 @@ export interface UseEventParams {
   isDebounce?: boolean;
   wait?: number;
 }
+
 export function useEventListener({
   el = window,
   name,

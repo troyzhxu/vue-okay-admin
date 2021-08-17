@@ -1,7 +1,10 @@
-import '/@/design/tailwind.css';
-import '/@/design/index.less';
+// Register windi
+import 'virtual:windi.css';
 // Register icon sprite
 import 'virtual:svg-icons-register';
+// 本项目样式库
+import '/@/design/index.less';
+
 import App from './App.vue';
 import { createApp } from 'vue';
 import { initAppConfigStore } from '/@/logics/initAppConfig';

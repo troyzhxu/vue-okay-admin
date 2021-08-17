@@ -22,18 +22,13 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-  import { computed, defineComponent } from 'vue';
+
+<script lang="ts" setup>
+  import { computed } from 'vue';
   import { Avatar } from 'ant-design-vue';
   import { useUserStore } from '/@/store/modules/user';
 
-  export default defineComponent({
-    components: { Avatar },
-    setup() {
-      const userStore = useUserStore();
-      const nickname = computed(() => userStore.getNickname);
-      const userAvatar = computed(() => userStore.getAvatar);
-      return { nickname, userAvatar };
-    },
-  });
+  const userStore = useUserStore();
+  const nickname = computed(() => userStore.getNickname);
+  const userAvatar = computed(() => userStore.getAvatar);
 </script>

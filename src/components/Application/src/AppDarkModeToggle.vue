@@ -6,8 +6,9 @@
     <SvgIcon size="14" name="sun" style="z-index: 1" />
   </div>
 </template>
-<script lang="ts">
-  import { defineComponent, computed } from 'vue';
+
+<script lang="ts" setup>
+  import { computed } from 'vue';
   import { SvgIcon } from '/@/components/Icon';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useDarkMode } from '/@/hooks/web/useDarkMode';
@@ -16,65 +17,52 @@
   import { updateDarkTheme } from '/@/logics/theme/dark';
   import { ThemeEnum } from '/@/enums/appEnum';
 
-  export default defineComponent({
-    name: 'DarkModeToggle',
-    components: { SvgIcon },
-    setup() {
-      const { prefixCls } = useDesign('dark-switch');
-      const { getAppTheme, setDarkMode, getShowDarkModeToggle } = useRootSetting();
+  const { prefixCls } = useDesign('dark-switch');
+  const { getAppTheme, setDarkMode, getShowDarkModeToggle } = useRootSetting();
 
-      const getClass = computed(() => [
-        prefixCls,
-        {
-          [`${prefixCls}--dark`]: getAppTheme.value === ThemeEnum.DARK,
-          [`${prefixCls}--light`]: getAppTheme.value === ThemeEnum.LIGHT,
-        },
-      ]);
-
-      const { isNowNight } = useDarkMode();
-
-      function toggleAutoMode(oldMode: ThemeEnum): ThemeEnum | null {
-        const isNight = isNowNight();
-        if (isNight && oldMode === ThemeEnum.LIGHT) {
-          return ThemeEnum.DARK;
-        }
-        if (!isNight && oldMode === ThemeEnum.DARK) {
-          return ThemeEnum.LIGHT;
-        }
-        return null;
-      }
-
-      function toggleDarkMode() {
-        const oldMode = getAppTheme.value;
-        const darkMode =
-          oldMode === ThemeEnum.DARK
-            ? ThemeEnum.LIGHT
-            : oldMode === ThemeEnum.LIGHT
-            ? ThemeEnum.AUTO
-            : ThemeEnum.DARK;
-        setDarkMode(darkMode);
-        if (darkMode == ThemeEnum.AUTO) {
-          const targetMode = toggleAutoMode(oldMode);
-          if (targetMode) {
-            updateDarkTheme(targetMode);
-            updateHeaderBgColor();
-            updateSidebarBgColor();
-          }
-        } else {
-          updateDarkTheme(darkMode);
-          updateHeaderBgColor();
-          updateSidebarBgColor();
-        }
-      }
-
-      return {
-        getClass,
-        prefixCls,
-        toggleDarkMode,
-        getShowDarkModeToggle,
-      };
+  const getClass = computed(() => [
+    prefixCls,
+    {
+      [`${prefixCls}--dark`]: getAppTheme.value === ThemeEnum.DARK,
+      [`${prefixCls}--light`]: getAppTheme.value === ThemeEnum.LIGHT,
     },
-  });
+  ]);
+
+  const { isNowNight } = useDarkMode();
+
+  function toggleAutoMode(oldMode: ThemeEnum): ThemeEnum | null {
+    const isNight = isNowNight();
+    if (isNight && oldMode === ThemeEnum.LIGHT) {
+      return ThemeEnum.DARK;
+    }
+    if (!isNight && oldMode === ThemeEnum.DARK) {
+      return ThemeEnum.LIGHT;
+    }
+    return null;
+  }
+
+  function toggleDarkMode() {
+    const oldMode = getAppTheme.value;
+    const darkMode =
+      oldMode === ThemeEnum.DARK
+        ? ThemeEnum.LIGHT
+        : oldMode === ThemeEnum.LIGHT
+        ? ThemeEnum.AUTO
+        : ThemeEnum.DARK;
+    setDarkMode(darkMode);
+    if (darkMode == ThemeEnum.AUTO) {
+      const targetMode = toggleAutoMode(oldMode);
+      if (targetMode) {
+        updateDarkTheme(targetMode);
+        updateHeaderBgColor();
+        updateSidebarBgColor();
+      }
+    } else {
+      updateDarkTheme(darkMode);
+      updateHeaderBgColor();
+      updateSidebarBgColor();
+    }
+  }
 </script>
 <style lang="less" scoped>
   @prefix-cls: ~'@{namespace}-dark-switch';

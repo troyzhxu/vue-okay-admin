@@ -111,7 +111,7 @@ export const usePermissionStore = defineStore({
         return roleList.some((role) => roles.includes(role));
       };
 
-      const routeRmoveIgnoreFilter = (route: AppRouteRecordRaw) => {
+      const routeRemoveIgnoreFilter = (route: AppRouteRecordRaw) => {
         const { meta } = route;
         const { ignoreRoute } = meta || {};
         return !ignoreRoute;
@@ -129,8 +129,8 @@ export const usePermissionStore = defineStore({
           routes = filter(asyncRoutes, routeFilter);
           routes = routes.filter(routeFilter);
           const menuList = transformRouteToMenu(routes, true);
-          routes = filter(routes, routeRmoveIgnoreFilter);
-          routes = routes.filter(routeRmoveIgnoreFilter);
+          routes = filter(routes, routeRemoveIgnoreFilter);
+          routes = routes.filter(routeRemoveIgnoreFilter);
           menuList.sort((a, b) => {
             return (a.meta?.orderNo || 0) - (b.meta?.orderNo || 0);
           });
@@ -167,8 +167,8 @@ export const usePermissionStore = defineStore({
           this.setBackMenuList(backMenuList);
 
           // remove meta.ignoreRoute item
-          routeList = filter(routeList, routeRmoveIgnoreFilter);
-          routeList = routeList.filter(routeRmoveIgnoreFilter);
+          routeList = filter(routeList, routeRemoveIgnoreFilter);
+          routeList = routeList.filter(routeRemoveIgnoreFilter);
 
           routeList = flatMultiLevelRoutes(routeList);
           routes = [PAGE_NOT_FOUND_ROUTE, ...routeList];

@@ -44,7 +44,7 @@ export function getAppEnvConfig() {
 }
 
 /**
- * @description: Development model
+ * @description: Development mode
  */
 export const devMode = 'development';
 

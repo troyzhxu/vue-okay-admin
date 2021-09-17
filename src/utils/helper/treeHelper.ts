@@ -45,7 +45,7 @@ export function treeToList<T = any>(tree: any, config: Partial<TreeHelperConfig>
 export function findNode<T = any>(
   tree: any,
   func: Fn,
-  config: Partial<TreeHelperConfig> = {}
+  config: Partial<TreeHelperConfig> = {},
 ): T | null {
   config = getConfig(config);
   const { children } = config;
@@ -60,7 +60,7 @@ export function findNode<T = any>(
 export function findNodeAll<T = any>(
   tree: any,
   func: Fn,
-  config: Partial<TreeHelperConfig> = {}
+  config: Partial<TreeHelperConfig> = {},
 ): T[] {
   config = getConfig(config);
   const { children } = config;
@@ -76,7 +76,7 @@ export function findNodeAll<T = any>(
 export function findPath<T = any>(
   tree: any,
   func: Fn,
-  config: Partial<TreeHelperConfig> = {}
+  config: Partial<TreeHelperConfig> = {},
 ): T | T[] | null {
   config = getConfig(config);
   const path: T[] = [];
@@ -125,7 +125,7 @@ export function findPathAll(tree: any, func: Fn, config: Partial<TreeHelperConfi
 export function filter<T = any>(
   tree: T[],
   func: (n: T) => boolean,
-  config: Partial<TreeHelperConfig> = {}
+  config: Partial<TreeHelperConfig> = {},
 ): T[] {
   config = getConfig(config);
   const children = config.children as string;
@@ -143,7 +143,7 @@ export function filter<T = any>(
 export function forEach<T = any>(
   tree: T[],
   func: (n: T) => any,
-  config: Partial<TreeHelperConfig> = {}
+  config: Partial<TreeHelperConfig> = {},
 ): void {
   config = getConfig(config);
   const list: any[] = [...tree];
@@ -169,7 +169,7 @@ export function treeMap<T = any>(treeData: T[], opt: { children?: string; conver
  */
 export function treeMapEach(
   data: any,
-  { children = 'children', conversion }: { children?: string; conversion: Fn }
+  { children = 'children', conversion }: { children?: string; conversion: Fn },
 ) {
   const haveChildren = Array.isArray(data[children]) && data[children].length > 0;
   const conversionData = conversion(data) || {};
@@ -180,7 +180,7 @@ export function treeMapEach(
         treeMapEach(i, {
           children,
           conversion,
-        })
+        }),
       ),
     };
   } else {
@@ -202,7 +202,7 @@ export function searchTree<T, R>(
   options: {
     childrenKey?: string;
     mapFunc?: (item: T) => R;
-  } = {}
+  } = {},
 ): R[] {
   const { childrenKey = 'children', mapFunc = (item) => item as unknown as R } = options;
   const list: R[] = [];
@@ -233,7 +233,7 @@ export function searchTree<T, R>(
 export function searchTreeItem<T>(
   sourceList: T[],
   matchFunc: (item: T) => boolean,
-  childrenKey = 'children'
+  childrenKey = 'children',
 ): T | undefined {
   for (let i = 0; i < sourceList.length; i++) {
     const item = sourceList[i];

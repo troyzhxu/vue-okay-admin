@@ -30,11 +30,7 @@ export function formatRequestDate(params: Recordable) {
     if (isString(key)) {
       const value = params[key];
       if (value) {
-        try {
-          params[key] = isString(value) ? value.trim() : value;
-        } catch (error) {
-          throw new Error(error);
-        }
+        params[key] = isString(value) ? value.trim() : value;
       }
     }
     if (isObject(params[key])) {

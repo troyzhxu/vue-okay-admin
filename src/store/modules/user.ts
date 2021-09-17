@@ -1,6 +1,8 @@
 import type { AuthToken, UserInfo } from '/#/store';
+import { h } from 'vue';
 import { defineStore } from 'pinia';
 import { store } from '/@/store';
+import { router } from '/@/router';
 import { PageEnum } from '/@/enums/pageEnum';
 import { TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
 import { Persistent } from '/@/utils/cache/persistent';
@@ -8,7 +10,6 @@ import { TokenModel, LoginParams } from '/@/api/sys/model/userModel';
 import { loginApi, getUserInfo, refreshToken } from '/@/api/sys/user';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { useMessage } from '/@/hooks/web/useMessage';
-import { router } from '/@/router';
 import headerImg from '/@/assets/images/header.jpg';
 
 interface UserState {
@@ -138,8 +139,8 @@ export const useUserStore = defineStore({
       const { t } = useI18n();
       createConfirm({
         iconType: 'warning',
-        title: t('sys.app.logoutTip'),
-        content: t('sys.app.logoutMessage'),
+        title: () => h('span', t('sys.app.logoutTip')),
+        content: () => h('span', t('sys.app.logoutMessage')),
         onOk: () => {
           this.logout();
         },

@@ -48,7 +48,7 @@ export function useEventListener({
           });
         }
       },
-      { immediate: true }
+      { immediate: true },
     );
 
     remove = () => {

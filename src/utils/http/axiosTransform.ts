@@ -6,7 +6,6 @@ import type { RequestOptions } from '/#/axios';
 
 export interface CreateAxiosOptions extends AxiosRequestConfig {
   authenticationScheme?: string;
-  urlPrefix?: string;
   transform?: AxiosTransform;
   requestOptions?: RequestOptions;
 }
@@ -48,6 +47,6 @@ export abstract class AxiosTransform {
    */
   asyncPreprocess?: (
     config: AxiosRequestConfig,
-    options: RequestOptions
+    options: RequestOptions,
   ) => Promise<RequestConfigOptions | null>;
 }

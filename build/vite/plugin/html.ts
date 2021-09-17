@@ -3,9 +3,7 @@
  * https://github.com/anncwb/vite-plugin-html
  */
 import type { Plugin } from 'vite';
-
 import html from 'vite-plugin-html';
-
 import pkg from '../../../package.json';
 import { GLOB_CONFIG_FILE_NAME } from '../../constant';
 import { APP_DARK_MODE_KEY } from '../../../src/enums/cacheEnum';
@@ -23,7 +21,7 @@ export function configHtmlPlugin(env: ViteEnv, isBuild: boolean) {
     minify: isBuild,
     inject: {
       // Inject data into ejs template
-      injectData: {
+      data: {
         title: VITE_GLOB_APP_TITLE,
         darkModeKey: APP_DARK_MODE_KEY,
       },

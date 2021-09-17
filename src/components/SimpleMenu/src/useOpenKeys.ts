@@ -15,7 +15,7 @@ export function useOpenKeys(
   menus: Ref<TMenu[]>,
   accordion: Ref<boolean>,
   mixSider: Ref<boolean>,
-  collapse: Ref<boolean>
+  collapse: Ref<boolean>,
 ) {
   const debounceSetOpenKeys = useDebounceFn(setOpenKeys, 50);
   async function setOpenKeys(path: string) {
@@ -38,7 +38,7 @@ export function useOpenKeys(
         menuState.activeSubMenuNames = menuState.openNames;
       },
       30,
-      native
+      native,
     );
   }
 

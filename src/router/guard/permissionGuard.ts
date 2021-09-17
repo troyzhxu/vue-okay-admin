@@ -16,9 +16,11 @@ export function createPermissionGuard(router: Router) {
   const userStore = useUserStoreWithOut();
   const permissionStore = usePermissionStoreWithOut();
   router.beforeEach(async (to, from, next) => {
+    console.log('Guard PER: beforeEach');
     // Jump to the 404 page after processing the login
     if (from.path === LOGIN_PATH && to.name === PAGE_NOT_FOUND_ROUTE.name) {
-      next(PageEnum.BASE_HOME);
+      console.log('Guard PER: next to home');
+      next(HOME_PATH);
       return;
     }
 
@@ -26,13 +28,14 @@ export function createPermissionGuard(router: Router) {
 
     // 若已登录，不可再进入登录页
     if (isLogin && to.path == LOGIN_PATH) {
-      console.log('Guard PER: redirct to home');
+      console.log('Guard PER: next to home');
       next(HOME_PATH);
       return;
     }
 
     // Whitelist can be directly entered
     if (whitePathList.includes(to.path as PageEnum)) {
+      console.log('Guard PER: next to ' + to.path);
       next();
       return;
     }

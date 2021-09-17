@@ -7,6 +7,7 @@
 </template>
 
 <script lang="ts" setup>
+  import { RouterView } from 'vue-router';
   import { ConfigProvider } from 'ant-design-vue';
   import { AppProvider } from '/@/components/Application';
   import { useTitle } from '/@/hooks/web/useTitle';

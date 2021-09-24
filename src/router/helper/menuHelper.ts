@@ -17,7 +17,7 @@ function joinParentPath(menus: Menu[], parentPath = '') {
     // https://next.router.vuejs.org/guide/essentials/nested-routes.html
     // Note that nested paths that start with / will be treated as a root path.
     // This allows you to leverage the component nesting without having to use a nested URL.
-    if (!(menu.path.startsWith('/') || isUrl(menu.path))) {
+    if (menu.path && !(menu.path.startsWith('/') || isUrl(menu.path))) {
       // path doesn't start with /, nor is it a url, join parent path
       menu.path = `${parentPath}/${menu.path}`;
     }
@@ -74,22 +74,24 @@ export function transformRouteToMenu(routeModList: AppRouteModule[], routerMappi
  * config menu with given params
  */
 const menuParamRegex = /(?::)([\s\S]+?)((?=\/)|$)/g;
+
 export function configureDynamicParamsMenu(menu: Menu, params: RouteParams) {
   const { path, paramPath } = toRaw(menu);
   let realPath = paramPath ? paramPath : path;
-  const matchArr = realPath.match(menuParamRegex);
-
-  matchArr?.forEach((it) => {
-    const realIt = it.substr(1);
-    if (params[realIt]) {
-      realPath = realPath.replace(`:${realIt}`, params[realIt] as string);
+  if (realPath) {
+    const matchArr = realPath.match(menuParamRegex);
+    matchArr?.forEach((it) => {
+      const realIt = it.substr(1);
+      if (params[realIt]) {
+        realPath = realPath.replace(`:${realIt}`, params[realIt] as string);
+      }
+    });
+    // save original param path.
+    if (!paramPath && matchArr && matchArr.length > 0) {
+      menu.paramPath = path;
     }
-  });
-  // save original param path.
-  if (!paramPath && matchArr && matchArr.length > 0) {
-    menu.paramPath = path;
+    menu.path = realPath;
   }
-  menu.path = realPath;
   // children
   menu.children?.forEach((item) => configureDynamicParamsMenu(item, params));
 }

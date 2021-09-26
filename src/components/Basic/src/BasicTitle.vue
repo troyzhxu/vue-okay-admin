@@ -50,7 +50,6 @@
     font-weight: 500;
     line-height: 24px;
     color: @text-color-base;
-    cursor: pointer;
     user-select: none;
 
     &-normal {

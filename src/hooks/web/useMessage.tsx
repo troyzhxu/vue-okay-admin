@@ -48,7 +48,7 @@ function getIcon(iconType: string) {
 
 function renderContent({ content }: Pick<ModalOptionsEx, 'content'>) {
   if (isString(content)) {
-    return <div innerHTML={`<div>${content as string}</div>`}></div>;
+    return () => <div innerHTML={`<div>${content as string}</div>`}></div>;
   } else {
     return content;
   }
@@ -62,7 +62,7 @@ function createConfirm(options: ModalOptionsEx): ConfirmOptions {
   Reflect.deleteProperty(options, 'iconType');
   const opt: ModalFuncProps = {
     centered: true,
-    icon: getIcon(iconType),
+    icon: () => getIcon(iconType),
     ...options,
     content: renderContent(options),
   };

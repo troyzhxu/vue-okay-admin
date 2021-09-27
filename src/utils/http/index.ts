@@ -99,8 +99,8 @@ const transform: AxiosTransform = {
     }
     if (err?.includes('Network Error')) {
       createErrorModal({
-        title: t('sys.api.networkException'),
-        content: t('sys.api.networkExceptionMsg'),
+        title: () => t('sys.api.networkException'),
+        content: () => t('sys.api.networkExceptionMsg'),
       });
       return;
     }
@@ -150,8 +150,8 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           withToken: true,
         },
       },
-      opt || {}
-    )
+      opt || {},
+    ),
   );
 }
 export const defHttp = createAxios();

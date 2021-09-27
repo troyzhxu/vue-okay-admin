@@ -53,8 +53,8 @@
         );
         unref(isSuccessRef) &&
           createSuccessModal({
-            title: t('layout.setting.operatingTitle'),
-            content: t('layout.setting.operatingContent'),
+            title: () => t('layout.setting.operatingTitle'),
+            content: () => t('layout.setting.operatingContent'),
           });
       }
       function handleResetSetting() {
@@ -66,7 +66,7 @@
           updateGrayMode(grayMode);
           createMessage.success(t('layout.setting.resetSuccess'));
         } catch (error) {
-          createMessage.error(error);
+          createMessage.error(error as string);
         }
       }
 

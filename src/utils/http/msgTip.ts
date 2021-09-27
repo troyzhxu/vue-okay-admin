@@ -11,8 +11,8 @@ function logMsg(mode: ErrMsgMode, msg: string) {
   if (mode == 'modal') {
     const { t } = useI18n();
     createErrorModal({
-      title: t('sys.api.errorTip'),
-      content: msg,
+      title: () => t('sys.api.errorTip'),
+      content: () => msg,
     });
   }
 }

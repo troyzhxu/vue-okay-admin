@@ -114,8 +114,8 @@ export const useUserStore = defineStore({
       const { t } = useI18n();
       createConfirm({
         iconType: 'warning',
-        title: t('sys.app.logoutTip'),
-        content: t('sys.api.timeoutMessage'),
+        title: () => t('sys.app.logoutTip'),
+        content: () => t('sys.api.timeoutMessage'),
         onOk: () => {
           this.logout();
         },

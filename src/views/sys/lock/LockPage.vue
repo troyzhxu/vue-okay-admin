@@ -99,9 +99,9 @@
   import { LockOutlined } from '@ant-design/icons-vue';
   import { useUserStore } from '/@/store/modules/user';
   import { useLockStore } from '/@/store/modules/lock';
-  import { useNow } from './useNow';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useI18n } from '/@/hooks/web/useI18n';
+  import { useNow } from './useNow';
 
   const InputPassword = Input.Password;
 

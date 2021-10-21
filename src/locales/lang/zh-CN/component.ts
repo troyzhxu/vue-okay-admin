@@ -13,6 +13,7 @@ export default {
     uploadSuccess: '上传成功',
     modalTitle: '头像上传',
     okText: '确认并上传',
+    cancelText: '取消',
     btn_reset: '重置',
     btn_rotate_left: '逆时针旋转',
     btn_rotate_right: '顺时针旋转',

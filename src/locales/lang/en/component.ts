@@ -13,6 +13,7 @@ export default {
     uploadSuccess: 'Uploaded success!',
     modalTitle: 'Avatar upload',
     okText: 'Confirm and upload',
+    cancelText: 'Cancel',
     btn_reset: 'Reset',
     btn_rotate_left: 'Counterclockwise rotation',
     btn_rotate_right: 'Clockwise rotation',

@@ -7,6 +7,7 @@
     :canFullscreen="false"
     @ok="handleOk"
     :okText="t('component.cropper.okText')"
+    :cancelText="t('component.cropper.cancelText')"
   >
     <div :class="prefixCls">
       <div :class="`${prefixCls}-left`">
@@ -185,7 +186,7 @@
           const blob = dataURLtoBlob(previewSource.value);
           try {
             setModalProps({ confirmLoading: true });
-            const result = await uploadApi({ name: 'file', file: blob, filename });
+            const result = await uploadApi({ name: 'avatar', file: blob, filename });
             emit('uploadSuccess', { source: previewSource.value, data: result.data });
             closeModal();
           } finally {

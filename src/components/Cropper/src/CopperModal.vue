@@ -6,6 +6,7 @@
     width="800px"
     :canFullscreen="false"
     @ok="handleOk"
+    @cancel="handleCancel"
     :okText="t('component.cropper.okText')"
     :cancelText="t('component.cropper.cancelText')"
   >
@@ -195,6 +196,12 @@
         }
       }
 
+      function handleCancel() {
+        filename = '';
+        src.value = '';
+        previewSource.value = '';
+      }
+
       return {
         t,
         prefixCls,
@@ -206,6 +213,7 @@
         handleReady,
         handlerToolbar,
         handleOk,
+        handleCancel,
       };
     },
   });

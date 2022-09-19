@@ -134,7 +134,9 @@
           isClickGo.value = false;
           return;
         }
-        const path = (route || unref(currentRoute)).path;
+        const path =
+          (route || unref(currentRoute)).meta?.currentActiveMenu ||
+          (route || unref(currentRoute)).path;
         setOpenKeys(path);
         if (unref(activeMenu)) return;
         if (props.isHorizontal && unref(getSplit)) {

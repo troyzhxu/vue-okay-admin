@@ -85,6 +85,7 @@
       font-size: 16px;
       font-weight: 700;
       transition: all 0.5s;
+      line-height: normal;
     }
   }
 </style>

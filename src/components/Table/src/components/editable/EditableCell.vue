@@ -246,7 +246,7 @@
         if (!record) return false;
         const { key, dataIndex } = column;
         const value = unref(currentValueRef);
-        if (!key || !dataIndex) return;
+        if (!key && !dataIndex) return;
 
         const dataKey = (dataIndex || key) as string;
 
@@ -265,7 +265,7 @@
               result = await beforeEditSubmit({
                 record: pick(record, keys),
                 index,
-                key,
+                key: key as string,
                 value,
               });
             } catch (e) {

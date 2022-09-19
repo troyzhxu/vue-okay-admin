@@ -1,6 +1,6 @@
 import { isObject, isString } from '/@/utils/is';
 
-const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm';
+const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
 export function joinTimestamp(params: object, join: boolean): object {
   if (!join) {

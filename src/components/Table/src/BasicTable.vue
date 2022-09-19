@@ -223,7 +223,6 @@
       const getBindValues = computed(() => {
         const dataSource = unref(getDataSourceRef);
         let propsData: Recordable = {
-          size: 'middle',
           // ...(dataSource.length === 0 ? { getPopupContainer: () => document.body } : {}),
           ...attrs,
           customRow,
@@ -359,16 +358,10 @@
       padding: 16px;
 
       .ant-form {
-        padding: 12px 10px 6px 10px;
+        padding: 12px 10px 6px;
         margin-bottom: 16px;
         background-color: @component-background;
         border-radius: 2px;
-      }
-    }
-
-    &--inset {
-      .ant-table-wrapper {
-        padding: 0;
       }
     }
 
@@ -383,7 +376,7 @@
 
       .ant-table-title {
         min-height: 40px;
-        padding: 0 0 8px 0 !important;
+        padding: 0 0 8px !important;
       }
 
       .ant-table.ant-table-bordered .ant-table-title {
@@ -409,7 +402,7 @@
     }
 
     .ant-pagination {
-      margin: 10px 0 0 0;
+      margin: 10px 0 0;
     }
 
     .ant-table-footer {
@@ -430,6 +423,12 @@
 
       td {
         padding: 12px 8px;
+      }
+    }
+
+    &--inset {
+      .ant-table-wrapper {
+        padding: 0;
       }
     }
   }

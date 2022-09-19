@@ -4,6 +4,7 @@ export { default as EditTableHeaderIcon } from './src/components/EditTableHeader
 export { default as TableImg } from './src/components/TableImg.vue';
 export { default as TreeTable } from './src/TreeTable';
 export { default as BasicTreeTable } from './src/BasicTreeTable.vue';
+
 export * from './src/types/table';
 export * from './src/types/pagination';
 export * from './src/types/tableAction';

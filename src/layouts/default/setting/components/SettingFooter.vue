@@ -59,6 +59,7 @@
       }
       function handleResetSetting() {
         try {
+          console.log('defaultSetting.themeColor = ', defaultSetting.themeColor);
           appStore.setProjectConfig(defaultSetting);
           const { colorWeak, grayMode } = defaultSetting;
           // updateTheme(themeColor);

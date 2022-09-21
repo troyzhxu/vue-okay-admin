@@ -15,36 +15,51 @@ import { getThemeColors, generateColors } from '../../config/themeConfig';
 import { generateModifyVars } from '../../generate/generateModifyVars';
 
 export function configThemePlugin(isBuild: boolean): PluginOption[] {
-  const colors = generateColors({
-    mixDarken,
-    mixLighten,
-    tinycolor,
+  const themePlugins = viteThemePlugin({
+    resolveSelector: (s) => {
+      s = s.trim();
+      switch (s) {
+        case '.ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon':
+          return '.ant-steps-item-icon > .ant-steps-icon';
+        case '.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)':
+        case '.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover':
+        case '.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):active':
+          return s;
+        case '.ant-steps-item-icon > .ant-steps-icon':
+          return s;
+        case '.ant-select-item-option-selected:not(.ant-select-item-option-disabled)':
+          return s;
+        default:
+          if (s.indexOf('.ant-btn') >= -1) {
+            // 按钮被重新定制过，需要过滤掉class防止覆盖
+            return s;
+          }
+      }
+      return s.startsWith('[data-theme') ? s : `[data-theme] ${s}`;
+    },
+    colorVariables: [
+      ...getThemeColors(),
+      ...generateColors({
+        mixDarken,
+        mixLighten,
+        tinycolor,
+      }),
+    ],
   });
+
+  themePlugins.forEach((plugin) => {
+    //对vite:theme插件特殊配置
+    if ('vite:theme' === plugin.name) {
+      // 打包时去除 enforce: "post"，vite 2.6.x 适配，否则生成 app-theme-style 为空，因为 async transform(code, id) { 的 code 没有正确获取
+      if (isBuild) {
+        delete plugin.enforce;
+      }
+      //console.log(item);
+    }
+  });
+
   const plugin = [
-    viteThemePlugin({
-      resolveSelector: (s) => {
-        s = s.trim();
-        switch (s) {
-          case '.ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon':
-            return '.ant-steps-item-icon > .ant-steps-icon';
-          case '.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)':
-          case '.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover':
-          case '.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):active':
-            return s;
-          case '.ant-steps-item-icon > .ant-steps-icon':
-            return s;
-          case '.ant-select-item-option-selected:not(.ant-select-item-option-disabled)':
-            return s;
-          default:
-            if (s.indexOf('.ant-btn') >= -1) {
-              // 按钮被重新定制过，需要过滤掉class防止覆盖
-              return s;
-            }
-        }
-        return s.startsWith('[data-theme') ? s : `[data-theme] ${s}`;
-      },
-      colorVariables: [...getThemeColors(), ...colors],
-    }),
+    themePlugins,
     antdDarkThemePlugin({
       preloadFiles: [
         path.resolve(process.cwd(), 'node_modules/ant-design-vue/dist/antd.less'),
